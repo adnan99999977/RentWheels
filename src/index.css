@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default, light --prefersdark;
+}
+
+*{
+   font-family: "Orbitron", sans-serif;
+}
