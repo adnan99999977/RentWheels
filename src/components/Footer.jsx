@@ -1,18 +1,45 @@
+import React, { useState } from "react";
 import {
   FaFacebookF,
   FaXTwitter,
   FaInstagram,
   FaYoutube,
 } from "react-icons/fa6";
+import { ToastContainer, toast } from "react-toastify";
 
 const Footer = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleContact = () => setIsModalOpen(true);
+  const handleClose = () => setIsModalOpen(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSend = () => {
+    toast.success(
+      <div className="space-y-1">
+        <p className="font-semibold">Message sent successfully!</p>
+      </div>
+    );
+
+    setFormData({ name: "", email: "", message: "" });
+    setIsModalOpen(false);
+  };
+
   return (
     <footer className="bg-black text-gray-300 py-12 px-6 md:px-20 relative overflow-hidden">
       {/* Top Section */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-gray-800 pb-10">
         {/* Info Section */}
         <div className="space-y-5 relative z-10">
-          <p className="font-bold border border-gray-300 w-60 px-4 py-1  text-lg lg:text-2xl flex items-center gap-1 text-center rounded-full">
+          <p className="font-bold border border-gray-300 w-60 px-4 py-1 text-lg lg:text-2xl flex items-center gap-1 text-center rounded-full">
             <span className="text-gray-300">RENT</span>
             <span className="text-[#09764c]">WHEELS</span>
           </p>
@@ -80,7 +107,10 @@ const Footer = () => {
             <span className="text-[#09764c] font-semibold">PHONE:</span>{" "}
             +8801839373767
           </p>
-          <button className="relative hidden lg:flex items-center gap-2 px-4 py-2 border-2 border-[#09764c] text-[#09764c] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out">
+          <button
+            onClick={handleContact}
+            className="relative hidden lg:flex items-center gap-2 px-4 py-2 border-2 border-[#09764c] text-[#09764c] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out"
+          >
             <span className="absolute inset-0 bg-[#09764c] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
             <span className="relative z-10 flex items-center gap-2 group-hover:text-white">
               Get In Touch
@@ -121,6 +151,58 @@ const Footer = () => {
       <div className="absolute -top-28 -left-40 w-[400px] h-[500px] bg-[#09964c]/10 rotate-45 rounded-3xl"></div>
       <div className="absolute -top-28 -left-60 w-[400px] h-[500px] bg-[#939e9c]/10 rotate-45 rounded-3xl"></div>
       <div className="absolute -top-28 -left-80 w-[400px] h-[500px] bg-[#939e9c]/10 rotate-45 rounded-3xl"></div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-black border border-gray-300 text-gray-300 p-6 rounded-lg w-11/12 max-w-md relative">
+            <button
+              onClick={handleClose}
+              className="absolute top-3 right-3 text-gray-300 hover:text-[#09764c] text-xl font-bold"
+            >
+              &times;
+            </button>
+            <h2 className="text-xl font-semibold mb-4 text-[#09764c]">
+              Get In Touch
+            </h2>
+            <input
+              type="text"
+              name="name"
+              required
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full mb-3 p-2 rounded bg-gray-800 text-gray-100 border border-gray-600"
+            />
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="Your Email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full mb-3 p-2 rounded bg-gray-800 text-gray-100 border border-gray-600"
+            />
+            <textarea
+              name="message"
+              required
+              placeholder="Your Message"
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full mb-3 p-2 rounded bg-gray-800 text-gray-100 border border-gray-600"
+            />
+            <button
+              onClick={handleSend}
+              className="w-full bg-[#09764c] hover:bg-white hover:text-[#09764c] text-white font-semibold py-2 rounded transition-all duration-300"
+            >
+              Send
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Toast Container */}
+      <ToastContainer position="top-center" autoClose={3000} />
     </footer>
   );
 };
