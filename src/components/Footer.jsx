@@ -34,7 +34,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-gray-300 py-12 px-6 md:px-20 relative overflow-hidden">
+    <footer className="bg-black border-t border-gray-900 sha text-gray-300 py-12 px-6 md:px-20 relative overflow-hidden">
       {/* Top Section */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-gray-800 pb-10">
         {/* Info Section */}
@@ -133,7 +133,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 pt-6">
+      <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 pt-6 ">
         <p>© RENTWHEELS 2025. All Rights Reserved.</p>
         <div className="flex space-x-5 mt-3 md:mt-0">
           {["Terms of Use", "Privacy Policy", "Blog"].map((item, i) => (

@@ -12,3 +12,9 @@
 .gray-color{
   color: gray;
 }
+
+.page-section {
+  @apply bg-black pt-30 relative py-12 px-6 md:px-20 min-h-screen overflow-hidden;
+
+}
+

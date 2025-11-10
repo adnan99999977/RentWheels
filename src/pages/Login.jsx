@@ -1,6 +1,6 @@
-import  { useContext } from "react";
+import { useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
-import {  AuthContext } from "../auth/AuthContext";
+import { AuthContext } from "../auth/AuthContext";
 
 const Login = () => {
   const { signInViaGoogle, signInUser } = useContext(AuthContext);
@@ -10,9 +10,7 @@ const Login = () => {
 
   const handleGoogle = () => {
     signInViaGoogle()
-      .then((result) => {
-        navigate(from);
-      })
+      .then(() => navigate(from))
       .catch(console.error);
   };
 
@@ -27,53 +25,56 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-50 via-purple-50 to-blue-50 px-4">
-      <div className="max-w-md w-full bg-white rounded-3xl shadow-2xl p-10 space-y-3 border border-white/30 backdrop-blur-sm">
-        <h1 className="text-4xl font-extrabold text-gray-800 text-center">
-          Welcome Back
+    <div className="page-section min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-700 via-black to-gray-800 p-6">
+      <div className="max-w-md w-full bg-white/5 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-10 space-y-6 transform transition-all duration-500 hover:scale-[1.02]">
+        {/* Title */}
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-center text-[#09764c] drop-shadow-lg animate-fade-in-down">
+          Welcome 
         </h1>
-        <p className="text-center text-gray-500">
-          Login to access your Smart Deals account
+        <p className="text-center text-gray-300 animate-fade-in-down animate-delay-200">
+          Login to access your Rent Wheels account
         </p>
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        {/* Form */}
+        <form onSubmit={handleLogin} className="space-y-4 animate-fade-in-up animate-delay-400">
           <input
             name="email"
             type="email"
             placeholder="Email"
-            className="input w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition"
+            className="input w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#09764c] focus:border-transparent transition shadow-sm hover:shadow-md"
             required
           />
           <input
             name="password"
             type="password"
             placeholder="Password"
-            className="input w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition"
+            className="input w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#09764c] focus:border-transparent transition shadow-sm hover:shadow-md"
             required
           />
           <button
             type="submit"
-            className="w-full py-2 bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300"
+            className="w-full py-3 bg-gradient-to-r from-[#09764c] via-[#022f22] to-[#0cb87d] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-500"
           >
             Login
           </button>
         </form>
 
-        <div className="text-center text-gray-500 font-medium">or</div>
+        <div className="text-center text-gray-400 font-medium animate-fade-in-up animate-delay-600">or</div>
 
+        {/* Google Login */}
         <button
           onClick={handleGoogle}
-          className="w-full flex items-center justify-center py-2 bg-white text-gray-800 font-semibold rounded-xl border border-gray-300 shadow-md hover:shadow-lg transition transform hover:scale-105"
+          className="w-full flex items-center justify-center py-3 bg-white/90 text-gray-800 font-semibold rounded-xl border border-white/30 shadow-md hover:shadow-xl transition transform hover:scale-105 animate-fade-in-up animate-delay-800"
         >
           <svg
             aria-label="Google logo"
-            width="20"
-            height="20"
+            width="30"
+            height="30"
             viewBox="0 0 512 512"
             className="mr-2"
           >
             <g>
-              <path d="m0 0H512V512H0" fill="#fff"></path>
+              <path d="m0 0H512V512H0" fill="#e7e7e7"></path>
               <path
                 fill="#34a853"
                 d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
@@ -95,16 +96,41 @@ const Login = () => {
           Login with Google
         </button>
 
-        <p className="text-center text-gray-500">
+        {/* Register Link */}
+        <p className="text-center text-gray-400 animate-fade-in-up animate-delay-1000">
           New here?{" "}
           <NavLink
             to="/register"
-            className="text-indigo-600 font-bold hover:underline"
+            className="text-[#09764c] font-bold hover:underline"
           >
             Create Account
           </NavLink>
         </p>
       </div>
+
+      {/* Tailwind Animations */}
+      <style>{`
+        @keyframes fade-in-down {
+          0% { opacity: 0; transform: translateY(-20px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-down {
+          animation: fade-in-down 0.8s ease forwards;
+        }
+        .animate-delay-200 { animation-delay: 0.2s; }
+        .animate-delay-400 { animation-delay: 0.4s; }
+        .animate-delay-600 { animation-delay: 0.6s; }
+        .animate-delay-800 { animation-delay: 0.8s; }
+        .animate-delay-1000 { animation-delay: 1s; }
+
+        @keyframes fade-in-up {
+          0% { opacity: 0; transform: translateY(20px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease forwards;
+        }
+      `}</style>
     </div>
   );
 };
