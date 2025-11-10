@@ -1,12 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../auth/AuthContext";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const { signInViaGoogle, signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from || "/";
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
   const handleGoogle = () => {
     signInViaGoogle()
@@ -19,9 +23,20 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
+    // Basic password check (≥6 chars)
+    if (password.length < 6) {
+      setLoginError("Password must be at least 6 characters long.");
+      return;
+    } else {
+      setLoginError("");
+    }
+
     signInUser(email, password)
       .then(() => navigate(from))
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        setLoginError("Invalid email or password."); // show error if login fails
+      });
   };
 
   return (
@@ -29,7 +44,7 @@ const Login = () => {
       <div className="max-w-md w-full bg-white/5 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-10 space-y-6 transform transition-all duration-500 hover:scale-[1.02]">
         {/* Title */}
         <h1 className="text-4xl sm:text-5xl font-extrabold text-center text-[#09764c] drop-shadow-lg animate-fade-in-down">
-          Welcome 
+          Welcome
         </h1>
         <p className="text-center text-gray-300 animate-fade-in-down animate-delay-200">
           Login to access your Rent Wheels account
@@ -44,13 +59,26 @@ const Login = () => {
             className="input w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#09764c] focus:border-transparent transition shadow-sm hover:shadow-md"
             required
           />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            className="input w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#09764c] focus:border-transparent transition shadow-sm hover:shadow-md"
-            required
-          />
+
+          {/* Password input with show/hide */}
+          <div className="relative">
+            <input
+              name="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="input w-full rounded-xl border border-gray-300 px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-[#09764c] focus:border-transparent transition shadow-sm hover:shadow-md"
+              required
+            />
+            <span
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 z-10"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEye />: <FaEyeSlash /> }
+            </span>
+          </div>
+
+          {loginError && <p className="text-red-500 text-sm">{loginError}</p>}
+
           <button
             type="submit"
             className="w-full py-3 bg-gradient-to-r from-[#09764c] via-[#022f22] to-[#0cb87d] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-500"
@@ -114,9 +142,7 @@ const Login = () => {
           0% { opacity: 0; transform: translateY(-20px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in-down {
-          animation: fade-in-down 0.8s ease forwards;
-        }
+        .animate-fade-in-down { animation: fade-in-down 0.8s ease forwards; }
         .animate-delay-200 { animation-delay: 0.2s; }
         .animate-delay-400 { animation-delay: 0.4s; }
         .animate-delay-600 { animation-delay: 0.6s; }
@@ -127,9 +153,7 @@ const Login = () => {
           0% { opacity: 0; transform: translateY(20px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease forwards;
-        }
+        .animate-fade-in-up { animation: fade-in-up 0.8s ease forwards; }
       `}</style>
     </div>
   );

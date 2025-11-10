@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../auth/AuthContext";
 import { useNavigate, useLocation } from "react-router";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -8,10 +9,18 @@ const Register = () => {
   const from = location.state?.from || "/";
   const { signInViaGoogle, registerUser, updateUser } = useContext(AuthContext);
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+
   const handleGoogle = () => {
     signInViaGoogle()
       .then(() => navigate(from))
       .catch(console.error);
+  };
+
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    return regex.test(password);
   };
 
   const handleRegister = (e) => {
@@ -19,6 +28,15 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const photoURL = e.target.photo.value;
+
+    if (!validatePassword(password)) {
+      setPasswordError(
+        "Password must be ≥6 characters, include 1 uppercase and 1 lowercase letter."
+      );
+      return;
+    } else {
+      setPasswordError("");
+    }
 
     registerUser(email, password)
       .then(() => {
@@ -31,17 +49,19 @@ const Register = () => {
   return (
     <div className="page-section min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 p-6">
       <div className="max-w-md w-full bg-white/5 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-10 space-y-6 transform transition-all duration-500 hover:scale-[1.02] animate-fade-in-up">
-        
         {/* Title */}
         <h1 className="text-4xl sm:text-5xl font-extrabold text-center text-[#09764c] drop-shadow-lg animate-fade-in-down">
           Create Account
         </h1>
         <p className="text-center text-gray-300 animate-fade-in-down animate-delay-200">
-        RentWheels — From city runs to long drives — we’ve got you.
+          RentWheels — From city runs to long drives — we’ve got you.
         </p>
 
         {/* Form */}
-        <form onSubmit={handleRegister} className="space-y-3 animate-fade-in-up animate-delay-400">
+        <form
+          onSubmit={handleRegister}
+          className="space-y-3 animate-fade-in-up animate-delay-400"
+        >
           <input
             name="email"
             type="email"
@@ -49,13 +69,30 @@ const Register = () => {
             className="input w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#09764c] focus:border-transparent transition shadow-sm hover:shadow-md"
             required
           />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            className="input w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#09764c] focus:border-transparent transition shadow-sm hover:shadow-md"
-            required
-          />
+
+          {/* Password with show/hide toggle */}
+          {/* Password with show/hide toggle */}
+          <div className="relative">
+            <input
+              name="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="input w-full rounded-xl border border-gray-300 px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-[#09764c] focus:border-transparent transition shadow-sm hover:shadow-md"
+              required
+            />
+            {/* Eye icon */}
+            <span
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 z-10"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ?<FaEye />: <FaEyeSlash />}
+            </span>
+          </div>
+
+          {passwordError && (
+            <p className="text-red-500 text-sm">{passwordError}</p>
+          )}
+
           <input
             name="photo"
             type="text"
@@ -70,7 +107,9 @@ const Register = () => {
           </button>
         </form>
 
-        <div className="text-center text-gray-400 font-medium animate-fade-in-up animate-delay-600">or</div>
+        <div className="text-center text-gray-400 font-medium animate-fade-in-up animate-delay-600">
+          or
+        </div>
 
         {/* Google Register */}
         <button
@@ -86,10 +125,22 @@ const Register = () => {
           >
             <g>
               <path d="m0 0H512V512H0" fill="#e7e7e7"></path>
-              <path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path>
-              <path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path>
-              <path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path>
-              <path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path>
+              <path
+                fill="#34a853"
+                d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
+              ></path>
+              <path
+                fill="#4285f4"
+                d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
+              ></path>
+              <path
+                fill="#fbbc02"
+                d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
+              ></path>
+              <path
+                fill="#ea4335"
+                d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
+              ></path>
             </g>
           </svg>
           Register with Google
@@ -113,9 +164,7 @@ const Register = () => {
           0% { opacity: 0; transform: translateY(-20px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in-down {
-          animation: fade-in-down 0.8s ease forwards;
-        }
+        .animate-fade-in-down { animation: fade-in-down 0.8s ease forwards; }
         .animate-delay-200 { animation-delay: 0.2s; }
         .animate-delay-400 { animation-delay: 0.4s; }
         .animate-delay-600 { animation-delay: 0.6s; }
@@ -126,9 +175,7 @@ const Register = () => {
           0% { opacity: 0; transform: translateY(20px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease forwards;
-        }
+        .animate-fade-in-up { animation: fade-in-up 0.8s ease forwards; }
       `}</style>
     </div>
   );
