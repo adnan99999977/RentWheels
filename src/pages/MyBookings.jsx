@@ -15,45 +15,53 @@ const MyBookings = () => {
   }, []);
 
   const handleCancel = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#09764c",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:5000/booking/${id}`, { method: "DELETE" })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.success) {
-              Swal.fire("Deleted!", data.message, "success");
-              setBookings((prev) => prev.filter((car) => car._id !== id));
-            } else {
-              Swal.fire("Error!", data.message, "error");
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#09764c",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // 1️⃣ Get the booking info first
+      const bookingToCancel = bookings.find((b) => b._id === id);
+      const carId = bookingToCancel?.carId; // assume this field exists in booking doc
+
+      // 2️⃣ Delete booking from DB
+      fetch(`http://localhost:5000/booking/${id}`, { method: "DELETE" })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            Swal.fire("Deleted!", data.message, "success");
+            setBookings((prev) => prev.filter((car) => car._id !== id));
+
+            // 3️⃣ Update car status back to available
+            if (carId) {
+              fetch(`http://localhost:5000/cars/${carId}`, {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                  authorization: `Bearer ${user.accessToken}`,
+                },
+                body: JSON.stringify({ status: "available" }),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  console.log("Updated car status:", data);
+                })
+                .catch((err) => console.error(err));
             }
-          });
-      }
-    });
-   
-     fetch(`http://localhost:5000/cars/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${user.accessToken}`
-      },
-      body: JSON.stringify({ status: "available" }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Updated status:", data);
-      })
-      .catch((err) => console.error(err));
+          } else {
+            Swal.fire("Error!", data.message, "error");
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  });
+};
 
-
-  };
 
   return (
     <div className="min-h-screen page-section p-6 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white flex flex-col justify-center">

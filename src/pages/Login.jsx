@@ -2,20 +2,49 @@ import { useContext, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../auth/AuthContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Toaster, toast } from "sonner";
 
 const Login = () => {
   const { signInViaGoogle, signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from || "/";
+  const from = location.state?.from?.pathname || "/";
 
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState("");
 
   const handleGoogle = () => {
     signInViaGoogle()
-      .then(() => navigate(from))
-      .catch(console.error);
+      .then(() => {
+        toast.success("Logged in with Google!", {
+          description: "Welcome back!",
+          position: "top-center",
+          duration: 2500,
+          style: {
+            background: "#09764c",
+            color: "#fff",
+            borderRadius: "12px",
+            border: "1px solid rgba(255,255,255,0.1)",
+            backdropFilter: "blur(8px)",
+          },
+        });
+        setTimeout(() => navigate(from), 2500);
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("❌ Google login failed!", {
+          description: "Try again later.",
+          position: "top-center",
+          duration: 2500,
+          style: {
+            background: "#a82323",
+            color: "#fff",
+            borderRadius: "12px",
+            border: "1px solid rgba(255,255,255,0.1)",
+            backdropFilter: "blur(8px)",
+          },
+        });
+      });
   };
 
   const handleLogin = (e) => {
@@ -23,7 +52,6 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    // Basic password check (≥6 chars)
     if (password.length < 6) {
       setLoginError("Password must be at least 6 characters long.");
       return;
@@ -32,17 +60,43 @@ const Login = () => {
     }
 
     signInUser(email, password)
-      .then(() => navigate(from))
+      .then(() => {
+        toast.success("Login successful!", {
+          description: "Welcome back!",
+          position: "top-center",
+          duration: 2500,
+          style: {
+            background: "#09764c",
+            color: "#fff",
+            borderRadius: "12px",
+            border: "1px solid rgba(255,255,255,0.1)",
+            backdropFilter: "blur(8px)",
+          },
+        });
+        setTimeout(() => navigate(from), 2500);
+      })
       .catch((err) => {
         console.error(err);
-        setLoginError("Invalid email or password."); // show error if login fails
+        setLoginError("Invalid email or password.");
+        toast.error("❌ Login failed!", {
+          description: "Check your credentials.",
+          position: "top-center",
+          duration: 2500,
+          style: {
+            background: "#a82323",
+            color: "#fff",
+            borderRadius: "12px",
+            border: "1px solid rgba(255,255,255,0.1)",
+            backdropFilter: "blur(8px)",
+          },
+        });
       });
   };
 
   return (
     <div className="page-section min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-700 via-black to-gray-800 p-6">
+      <Toaster richColors position="top-center" />
       <div className="max-w-md w-full bg-white/5 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-10 space-y-6 transform transition-all duration-500 hover:scale-[1.02]">
-        {/* Title */}
         <h1 className="text-4xl sm:text-5xl font-extrabold text-center text-[#09764c] drop-shadow-lg animate-fade-in-down">
           Welcome
         </h1>
@@ -50,8 +104,10 @@ const Login = () => {
           Login to access your Rent Wheels account
         </p>
 
-        {/* Form */}
-        <form onSubmit={handleLogin} className="space-y-4 animate-fade-in-up animate-delay-400">
+        <form
+          onSubmit={handleLogin}
+          className="space-y-4 animate-fade-in-up animate-delay-400"
+        >
           <input
             name="email"
             type="email"
@@ -60,7 +116,6 @@ const Login = () => {
             required
           />
 
-          {/* Password input with show/hide */}
           <div className="relative">
             <input
               name="password"
@@ -73,7 +128,7 @@ const Login = () => {
               className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 z-10"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <FaEye />: <FaEyeSlash /> }
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
             </span>
           </div>
 
@@ -87,9 +142,10 @@ const Login = () => {
           </button>
         </form>
 
-        <div className="text-center text-gray-400 font-medium animate-fade-in-up animate-delay-600">or</div>
+        <div className="text-center text-gray-400 font-medium animate-fade-in-up animate-delay-600">
+          or
+        </div>
 
-        {/* Google Login */}
         <button
           onClick={handleGoogle}
           className="w-full flex items-center justify-center py-3 bg-white/90 text-gray-800 font-semibold rounded-xl border border-white/30 shadow-md hover:shadow-xl transition transform hover:scale-105 animate-fade-in-up animate-delay-800"
@@ -124,7 +180,6 @@ const Login = () => {
           Login with Google
         </button>
 
-        {/* Register Link */}
         <p className="text-center text-gray-400 animate-fade-in-up animate-delay-1000">
           New here?{" "}
           <NavLink
@@ -136,7 +191,6 @@ const Login = () => {
         </p>
       </div>
 
-      {/* Tailwind Animations */}
       <style>{`
         @keyframes fade-in-down {
           0% { opacity: 0; transform: translateY(-20px); }

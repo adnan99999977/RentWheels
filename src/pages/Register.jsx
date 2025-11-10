@@ -6,7 +6,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from || "/";
+  const from = location.state?.from?.pathname || "/";
   const { signInViaGoogle, registerUser, updateUser } = useContext(AuthContext);
 
   const [showPassword, setShowPassword] = useState(false);
@@ -70,8 +70,8 @@ const Register = () => {
             required
           />
 
-          {/* Password with show/hide toggle */}
-          {/* Password with show/hide toggle */}
+          {/* Password  toggle */}
+       
           <div className="relative">
             <input
               name="password"
@@ -80,7 +80,7 @@ const Register = () => {
               className="input w-full rounded-xl border border-gray-300 px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-[#09764c] focus:border-transparent transition shadow-sm hover:shadow-md"
               required
             />
-            {/* Eye icon */}
+         
             <span
               className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 z-10"
               onClick={() => setShowPassword(!showPassword)}
@@ -146,7 +146,7 @@ const Register = () => {
           Register with Google
         </button>
 
-        {/* Login link */}
+       
         <p className="text-center text-gray-400 animate-fade-in-up animate-delay-1000">
           Already have an account?{" "}
           <a
@@ -158,7 +158,7 @@ const Register = () => {
         </p>
       </div>
 
-      {/* Tailwind Animations */}
+     
       <style>{`
         @keyframes fade-in-down {
           0% { opacity: 0; transform: translateY(-20px); }
