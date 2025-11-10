@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { motion, AnimatePresence } from "framer-motion";
+import { AuthContext } from "../auth/AuthContext";
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
+  const {user} = useContext(AuthContext)
 
   useEffect(() => {
     fetch(`http://localhost:5000/booking`)
@@ -40,6 +42,7 @@ const MyBookings = () => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${user.accessToken}`
       },
       body: JSON.stringify({ status: "available" }),
     })

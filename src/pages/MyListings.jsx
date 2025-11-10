@@ -27,7 +27,12 @@ const MyListings = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/cars/${id}`, { method: "DELETE" })
+        fetch(`http://localhost:5000/cars/${id}`, {
+          method: "DELETE",
+          headers: {
+            authorization: `Bearer ${user.accessToken}`,
+          },
+        })
           .then((res) => res.json())
           .then((data) => {
             if (data.success) {

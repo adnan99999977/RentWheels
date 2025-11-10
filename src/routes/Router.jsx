@@ -9,14 +9,17 @@ import MyBookings from "../pages/MyBookings";
 import MyListings from "../pages/MyListings";
 import CarDetails from "../pages/CarDetails";
 import PrivateRoute from "./PrivetRoute";
+import ErrorPage from "../components/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
+     errorElement:<ErrorPage/>,
     element: <MainLayout />,
     children: [
       {
         index: true,
+
         element: <Home />,
       },
       {
@@ -57,8 +60,9 @@ export const router = createBrowserRouter([
       },
       {
         path: "/car-details/:id",
-        element: <CarDetails/>,
-        loader: ({params})=>fetch(`http://localhost:5000/cars/${params.id}`)
+        element: <CarDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/cars/${params.id}`),
       },
     ],
   },
