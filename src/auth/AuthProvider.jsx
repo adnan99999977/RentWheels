@@ -1,4 +1,3 @@
-
 import { AuthContext } from "./AuthContext";
 import {
   createUserWithEmailAndPassword,
@@ -16,38 +15,55 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔹 Google Sign-In
   const provider = new GoogleAuthProvider();
-  const signInViaGoogle = () => {
+
+  //  Google Sign-In
+  const signInViaGoogle = async () => {
     setLoading(true);
-    return signInWithPopup(auth, provider);
+    try {
+      return await signInWithPopup(auth, provider);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // 🔹 Sign-In via Email & Password
-  const signInUser = (email, password) => {
+  //  Sign-In via Email & Password
+  const signInUser = async (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
+    try {
+      return await signInWithEmailAndPassword(auth, email, password);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // 🔹 Register New User
-  const registerUser = (email, password) => {
+  // Register New User
+  const registerUser = async (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    try {
+      return await createUserWithEmailAndPassword(auth, email, password);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // 🔹 Sign Out
-  const logOut = () => {
+  //  Sign Out
+  const logOut = async () => {
     setLoading(true);
-    return signOut(auth);
+    try {
+      return await signOut(auth);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // update profile
+  // Update Profile
   const updateUser = (photoURL) => {
     if (!auth.currentUser) return Promise.reject("No user logged in");
     return updateProfile(auth.currentUser, { photoURL });
   };
 
-  // 🔹 Track Auth State (current user)
+  //  Auth State
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);

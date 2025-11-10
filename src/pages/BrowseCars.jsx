@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
+import Loading from "../components/Loading";
 
 const BrowseCars = () => {
   const [cars, setCars] = useState([]);
+  const [loading, setLoading] = useState(true); 
+
   useEffect(() => {
+    setLoading(true);
     fetch("http://localhost:5000/cars")
       .then((res) => res.json())
-      .then((data) => setCars(data));
+      .then((data) => setCars(data))
+      .finally(() => setLoading(false)); 
   }, []);
 
+  if (loading) {
+    return <Loading />; 
+  }
+
   return (
-    <div className="page-section relative  py-20 px-6 md:px-12">
+    <div className="page-section relative py-20 px-6 md:px-12">
       {/* Background shapes */}
       <div className="absolute -top-28 -right-40 w-[400px] h-[500px] bg-[#09964c]/10 rotate-45 rounded-3xl"></div>
       <div className="absolute -top-28 -right-60 w-[400px] h-[500px] bg-[#939e9c]/10 rotate-45 rounded-3xl"></div>
@@ -34,7 +43,7 @@ const BrowseCars = () => {
       >
         Every car tells a story, every collection holds a dream.
       </motion.p>
-    
+
       {/* Car grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
         {cars.map((car, index) => (
@@ -63,16 +72,21 @@ const BrowseCars = () => {
               </p>
               <p className="text-gray-300 font-medium text-sm">
                 Status:{" "}
-                <span className={`font-bold ${car.status === "available" ? "text-[#003421] bg-[#16df92c0]  px-2 rounded-full" : "text-[#300305] bg-[#eb5555f8]  px-2 rounded-full"}`}>
+                <span
+                  className={`font-bold ${
+                    car.status === "available"
+                      ? "text-[#003421] bg-[#16df92c0] px-2 rounded-full"
+                      : "text-[#300305] bg-[#eb5555f8] px-2 rounded-full"
+                  }`}
+                >
                   {car.status.charAt(0).toUpperCase() + car.status.slice(1)}
                 </span>
               </p>
-             
             </div>
 
             {/* Hover overlay */}
             <motion.div
-              className="absolute  inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
+              className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
               whileHover={{ opacity: 1 }}
             >
               <Link
@@ -82,8 +96,6 @@ const BrowseCars = () => {
                 View Details
               </Link>
             </motion.div>
-
-          
           </motion.div>
         ))}
       </div>

@@ -1,18 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
+import  { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { motion, AnimatePresence } from "framer-motion";
 import { AuthContext } from "../auth/AuthContext";
+import Loading from "../components/Loading";
+
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const {user} = useContext(AuthContext)
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     fetch(`http://localhost:5000/booking`)
       .then((res) => res.json())
       .then((data) => setBookings(data))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+       .finally(() => setLoading(false));;
   }, []);
+
+  
+ 
 
   const handleCancel = (id) => {
   Swal.fire({
@@ -61,7 +68,10 @@ const MyBookings = () => {
     }
   });
 };
-
+  
+   if (loading) {
+    return <Loading />; 
+  }
 
   return (
     <div className="min-h-screen page-section p-6 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white flex flex-col justify-center">

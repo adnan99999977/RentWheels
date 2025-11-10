@@ -1,21 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../auth/AuthContext";
 import Swal from "sweetalert2";
+import Loading from "../components/Loading";
 
 const MyListings = () => {
   const { user } = useContext(AuthContext);
   const [listings, setListings] = useState([]);
   const [selectedCar, setSelectedCar] = useState(null);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     if (user?.email) {
       fetch(`http://localhost:5000/cars?ProviderEmail=${user.email}`)
         .then((res) => res.json())
         .then((data) => setListings(data))
-        .catch((err) => console.error(err));
+        .catch((err) => console.error(err))
+        .finally(() => setLoading(false));
     }
   }, [user?.email]);
 
+   
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -82,6 +86,10 @@ const MyListings = () => {
       });
     setSelectedCar(null);
   };
+   if (loading) {
+    return <Loading />; 
+  }
+
 
   return (
     <div className="page-section min-h-screen p-6 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white">
