@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../auth/AuthContext";
 import { useNavigate, useLocation } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Toaster, toast } from "sonner";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -14,8 +15,36 @@ const Register = () => {
 
   const handleGoogle = () => {
     signInViaGoogle()
-      .then(() => navigate(from))
-      .catch(console.error);
+      .then(() => {
+        toast.success(" Logged in with Google!", {
+          description: "Welcome aboard!",
+          position: "top-center",
+          duration: 2500,
+          style: {
+            background: "#09764c",
+            color: "#fff",
+            borderRadius: "12px",
+            border: "1px solid rgba(255,255,255,0.1)",
+            backdropFilter: "blur(8px)",
+          },
+        });
+        setTimeout(() => navigate(from), 2500);
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("❌ Google login failed!", {
+          description: "Try again later.",
+          position: "top-center",
+          duration: 2500,
+          style: {
+            background: "#a82323",
+            color: "#fff",
+            borderRadius: "12px",
+            border: "1px solid rgba(255,255,255,0.1)",
+            backdropFilter: "blur(8px)",
+          },
+        });
+      });
   };
 
   const validatePassword = (password) => {
@@ -41,15 +70,41 @@ const Register = () => {
     registerUser(email, password)
       .then(() => {
         updateUser({ photoURL }).catch(console.error);
-        navigate(from);
+        toast.success("✅ Registration successful!", {
+          description: "Welcome to RentWheels!",
+          position: "top-center",
+          duration: 2500,
+          style: {
+            background: "#09764c",
+            color: "#fff",
+            borderRadius: "12px",
+            border: "1px solid rgba(255,255,255,0.1)",
+            backdropFilter: "blur(8px)",
+          },
+        });
+        setTimeout(() => navigate(from), 2500);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        toast.error("❌ Registration failed!", {
+          description: "Please check your credentials.",
+          position: "top-center",
+          duration: 2500,
+          style: {
+            background: "#a82323",
+            color: "#fff",
+            borderRadius: "12px",
+            border: "1px solid rgba(255,255,255,0.1)",
+            backdropFilter: "blur(8px)",
+          },
+        });
+      });
   };
 
   return (
     <div className="page-section min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 p-6">
+      <Toaster richColors position="top-center" />
       <div className="max-w-md w-full bg-white/5 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-10 space-y-6 transform transition-all duration-500 hover:scale-[1.02] animate-fade-in-up">
-        {/* Title */}
         <h1 className="text-4xl sm:text-5xl font-extrabold text-center text-[#09764c] drop-shadow-lg animate-fade-in-down">
           Create Account
         </h1>
@@ -57,7 +112,6 @@ const Register = () => {
           RentWheels — From city runs to long drives — we’ve got you.
         </p>
 
-        {/* Form */}
         <form
           onSubmit={handleRegister}
           className="space-y-3 animate-fade-in-up animate-delay-400"
@@ -70,8 +124,6 @@ const Register = () => {
             required
           />
 
-          {/* Password  toggle */}
-       
           <div className="relative">
             <input
               name="password"
@@ -80,12 +132,11 @@ const Register = () => {
               className="input w-full rounded-xl border border-gray-300 px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-[#09764c] focus:border-transparent transition shadow-sm hover:shadow-md"
               required
             />
-         
             <span
               className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 z-10"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ?<FaEye />: <FaEyeSlash />}
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
             </span>
           </div>
 
@@ -99,6 +150,7 @@ const Register = () => {
             placeholder="Photo URL"
             className="input w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#09764c] focus:border-transparent transition shadow-sm hover:shadow-md"
           />
+
           <button
             type="submit"
             className="w-full py-3 bg-gradient-to-r from-[#09764c] via-[#022f22] to-[#0cb87d] text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-500"
@@ -111,7 +163,6 @@ const Register = () => {
           or
         </div>
 
-        {/* Google Register */}
         <button
           onClick={handleGoogle}
           className="w-full flex items-center justify-center py-3 bg-white/90 text-gray-800 font-semibold rounded-xl border border-white/30 shadow-md hover:shadow-xl transition transform hover:scale-105 animate-fade-in-up animate-delay-800"
@@ -146,7 +197,6 @@ const Register = () => {
           Register with Google
         </button>
 
-       
         <p className="text-center text-gray-400 animate-fade-in-up animate-delay-1000">
           Already have an account?{" "}
           <a
@@ -158,7 +208,8 @@ const Register = () => {
         </p>
       </div>
 
-     
+      <Toaster richColors position="top-center" />
+
       <style>{`
         @keyframes fade-in-down {
           0% { opacity: 0; transform: translateY(-20px); }
