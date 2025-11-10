@@ -21,6 +21,7 @@
     "react-toastify": "^11.0.5",
     "sonner": "^2.0.7",
     "sweetalert2": "^11.26.3",
+    "swiper": "^12.0.3",
     "typewriter-effect": "^2.22.0"
   },
   "devDependencies": {
