@@ -3,21 +3,35 @@ import Swal from "sweetalert2";
 import { motion, AnimatePresence } from "framer-motion";
 import { AuthContext } from "../auth/AuthContext";
 import Loading from "../components/Loading";
+import { getAuth } from "firebase/auth";
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
+  const auth = getAuth();
+
   useEffect(() => {
-    fetch(`http://localhost:5000/booking`)
+    fetch(`https://rent-wheels-server.vercel.app/booking`)
       .then((res) => res.json())
       .then((data) => setBookings(data))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, []);
 
-  const handleCancel = (id) => {
+  const handleCancel = async (id) => {
+    const bookingToCancel = bookings.find((b) => b._id === id);
+    const carId = bookingToCancel?.carId;
+
+    let token;
+    if (auth.currentUser) {
+      token = await auth.currentUser.getIdToken(); 
+    } else {
+      console.error("User not logged in");
+      return;
+    }
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -26,17 +40,13 @@ const MyBookings = () => {
       confirmButtonColor: "#09764c",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        // 1️⃣ Get the booking info first
-        const bookingToCancel = bookings.find((b) => b._id === id);
-        const carId = bookingToCancel?.carId; // assume this field exists in booking doc
-
-        //  Delete booking from DB
-        fetch(`http://localhost:5000/booking/${id}`, {
+        // DELETE booking
+        fetch(`https://rent-wheels-server.vercel.app/booking/${id}`, {
           method: "DELETE",
           headers: {
-            authorization: `Bearer ${user.accessToken}`,
+            Authorization: `Bearer ${token}`, 
           },
         })
           .then((res) => res.json())
@@ -45,20 +55,18 @@ const MyBookings = () => {
               Swal.fire("Deleted!", data.message, "success");
               setBookings((prev) => prev.filter((car) => car._id !== id));
 
-              //  Update car status back to available
+              // Update car status
               if (carId) {
-                fetch(`http://localhost:5000/cars/${carId}`, {
+                fetch(`https://rent-wheels-server.vercel.app/cars/${carId}`, {
                   method: "PATCH",
                   headers: {
                     "Content-Type": "application/json",
-                    authorization: `Bearer ${user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                   },
                   body: JSON.stringify({ status: "available" }),
                 })
                   .then((res) => res.json())
-                  .then((data) => {
-                    console.log("Updated car status:", data);
-                  })
+                  .then((data) => console.log("Updated car status:", data))
                   .catch((err) => console.error(err));
               }
             } else {

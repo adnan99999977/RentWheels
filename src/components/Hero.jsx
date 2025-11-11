@@ -24,12 +24,9 @@ const Hero = () => {
   overflow-hidden
 "
       >
-        {/* Overlay for better text visibility */}
         <div className="absolute inset-0 bg-black/40 z-0"></div>
 
-        {/* Content */}
         <motion.div className="relative z-10 flex flex-col gap-10 items-center">
-          {/* Title */}
           <h1 className="text-xl md:text-4xl font-semibold text-gray-100 ">
             Drive Your Freedom with{" "}
             <span className="text-[#09764c]">

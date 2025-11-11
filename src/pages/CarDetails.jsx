@@ -1,75 +1,92 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { Toaster, toast } from "sonner";
+import { AuthContext } from "../auth/AuthContext";
 
 const CarDetails = () => {
   const car = useLoaderData();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  console.log(user);
 
-  const handleBooking = () => {
-    const bookingData = {
-      ...car,
-      carId: car._id,
-      bookingStatus: "Active",
-      createdAt: new Date().toISOString(),
-    };
+  const handleBooking = async () => {
+    if (!user) {
+      toast.error("Please login to book a car!");
+      return;
+    }
 
-    // Booking save
-    fetch(`http://localhost:5000/booking`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(bookingData),
+    try {
+      const bookingData = {
+        ...car,
+        carId: car._id,
+        bookingStatus: "Active",
+        createdAt: new Date().toISOString(),
+      };
+
+      const bookingRes = await fetch(
+        `https://rent-wheels-server.vercel.app/booking`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${user.accessToken}`,
+          },
+          body: JSON.stringify(bookingData),
+        }
+      );
+      const bookingResult = await bookingRes.json();
+      console.log("Booking result:", bookingResult);
+
+      if (bookingResult.success === false) {
+        toast.error("Booking Failed: " + bookingResult.message);
+        return;
       }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        toast.success(" Booking Confirmed!", {
-          description: "Your car is now reserved successfully!",
-          position: "top-center",
-          duration: 2500,
-          style: {
-            background: "#09764c",
-            color: "#fff",
-            borderRadius: "12px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            backdropFilter: "blur(8px)",
-          },
-        });
 
-        setTimeout(() => {
-          navigate("/my-bookings");
-        }, 2500);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error(" Booking Failed!", {
-          description: "Something went wrong. Please try again.",
-          position: "top-center",
-          duration: 2500,
-          style: {
-            background: "rgba(200, 30, 30, 0.8)",
-            color: "#fff",
-            borderRadius: "12px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            backdropFilter: "blur(8px)",
+      const carRes = await fetch(
+        `https://rent-wheels-server.vercel.app/cars/${car._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${user.accessToken}`,
           },
-        });
+          body: JSON.stringify({ status: "Unavailable" }),
+        }
+      );
+      const carResult = await carRes.json();
+      console.log("Updated car status:", carResult);
+
+      toast.success("Booking Confirmed!", {
+        description: "Your car is now reserved successfully!",
+        position: "top-center",
+        duration: 2500,
+        style: {
+          background: "#09764c",
+          color: "#fff",
+          borderRadius: "12px",
+          border: "1px solid rgba(255,255,255,0.1)",
+          backdropFilter: "blur(8px)",
+        },
       });
 
-    // Car status update
-    fetch(`http://localhost:5000/cars/${car._id}`,
-      {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "Unavailable" }),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => console.log("Updated car status:", data))
-      .catch((err) => console.error(err));
+      setTimeout(() => {
+        navigate("/my-bookings");
+      }, 2500);
+    } catch (err) {
+      console.error(err);
+      toast.error("Booking Failed!", {
+        description: "Something went wrong. Please try again.",
+        position: "top-center",
+        duration: 2500,
+        style: {
+          background: "rgba(200, 30, 30, 0.8)",
+          color: "#fff",
+          borderRadius: "12px",
+          border: "1px solid rgba(255,255,255,0.1)",
+          backdropFilter: "blur(8px)",
+        },
+      });
+    }
   };
 
   return (

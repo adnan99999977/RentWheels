@@ -1,4 +1,4 @@
-@import url("http://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Kite+One&display=swap');
 @import "tailwindcss";
 @plugin "daisyui";
 @plugin "daisyui" {
@@ -6,7 +6,8 @@
 }
 
 * {
-  font-family: "Orbitron", sans-serif;
+   font-family: "Kite One", sans-serif;
+   font-weight: 700;
 }
 
 .gray-color {

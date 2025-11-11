@@ -9,7 +9,7 @@ const BrowseCars = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/cars")
+    fetch("https://rent-wheels-server.vercel.app/cars")
       .then((res) => res.json())
       .then((data) => setCars(data))
       .finally(() => setLoading(false));

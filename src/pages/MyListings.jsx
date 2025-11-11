@@ -11,7 +11,9 @@ const MyListings = () => {
 
   useEffect(() => {
     {
-      fetch(`http://localhost:5000/cars?ProviderEmail=${user.email}`)
+      fetch(
+        `https://rent-wheels-server.vercel.app/cars?ProviderEmail=${user.email}`
+      )
         .then((res) => res.json())
         .then((data) => setListings(data))
         .catch((err) => console.error(err))
@@ -30,7 +32,7 @@ const MyListings = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/cars/${id}`, {
+        fetch(`https://rent-wheels-server.vercel.app/cars/${id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${user.accessToken}`,
@@ -64,7 +66,7 @@ const MyListings = () => {
       provider: user?.email,
     };
 
-    fetch(`http://localhost:5000/cars/${selectedCar._id}`, {
+    fetch(`https://rent-wheels-server.vercel.app/cars/${selectedCar._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -87,6 +89,7 @@ const MyListings = () => {
           Swal.fire("Error!", "Update failed!", "error");
         }
       });
+      
     setSelectedCar(null);
   };
   if (loading) {

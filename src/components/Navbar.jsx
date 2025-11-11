@@ -6,10 +6,6 @@ import { CiLogout } from "react-icons/ci";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const url =
-    "http://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuGeAGmzS-ybJIKly7mgmnPLtuN-OqxO8FGw&s";
-
-
   const [drop, setDrop] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const dropdownRef = useRef(null);
@@ -18,7 +14,6 @@ const Navbar = () => {
   const handleMobileMenu = () => setMobileMenu(!mobileMenu);
   const handleLogout = () => logOut();
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -33,7 +28,6 @@ const Navbar = () => {
     isActive
       ? "relative font-semibold text-[#09764c] after:content-[''] after:absolute after:left-0 after:bottom-[-3px] after:w-full after:h-[2px] after:bg-[#09764c]"
       : "relative text-gray-300 hover:text-[#09764c] transition-colors duration-300 after:content-[''] after:absolute after:left-1/2 after:bottom-[-3px] after:w-0 after:h-[2px] after:bg-[#09764c] after:transition-all after:duration-500 after:ease-out hover:after:left-0 hover:after:w-full";
-
 
   return (
     <nav className="fixed top-0 z-100 w-full bg-black/30 backdrop-blur-2xl border-b border-gray-100/20 shadow-sm">
@@ -119,26 +113,22 @@ const Navbar = () => {
           )}
 
           {/* Profile Picture */}
-          <div
-            onClick={handleDropdown}
-            className="lg:w-12 w-10 h-12 rounded-full overflow-hidden border-2 border-gray-200 shadow-md hover:shadow-lg cursor-pointer transition-transform hover:scale-105"
-            title={user ? user.displayName : "Guest User"}
-          >
-            {user && user.photoURL ? (
-              <img
-                src={user.photoURL}
-                alt="User profile"
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
-              />
-            ) : (
-              <img
-                src={url}
-                alt="Default profile"
-                className="w-full h-full object-cover opacity-70"
-              />
-            )}
-          </div>
+          {user && (
+            <div
+              onClick={handleDropdown}
+              className="lg:w-12 w-10 h-12 rounded-full overflow-hidden border-2 border-gray-200 shadow-md hover:shadow-lg cursor-pointer transition-transform hover:scale-105"
+              title={user && user.displayName}
+            >
+              {user && user.photoURL && (
+                <img
+                  src={user.photoURL}
+                  alt="User profile"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              )}
+            </div>
+          )}
 
           {/* Profile Dropdown */}
           {drop && (

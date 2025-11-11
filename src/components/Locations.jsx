@@ -6,26 +6,34 @@ const locations = [
   {
     id: 1,
     name: "Dhaka",
-    image: "http://images.unsplash.com/photo-1706640254398-3b04782e8c76?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZGhha2ElMjBjaXR5fGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=800",
-    description: "Experience the fast-paced energy of Bangladesh’s capital with top-tier rental options.",
+    image:
+      "http://images.unsplash.com/photo-1706640254398-3b04782e8c76?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZGhha2ElMjBjaXR5fGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=800",
+    description:
+      "Experience the fast-paced energy of Bangladesh’s capital with top-tier rental options.",
   },
   {
     id: 2,
     name: "Chittagong",
-    image: "http://media.istockphoto.com/id/470928468/photo/the-silhouette-of-fishing-boat-on-beach-bangladesh.jpg?s=612x612&w=0&k=20&c=a46laqtwn1PKqXRzOVwUVkPAgzRaVw6NuIbpjIgdjHk=",
-    description: "Drive through coastal roads and hills with unmatched comfort and reliability.",
+    image:
+      "http://media.istockphoto.com/id/470928468/photo/the-silhouette-of-fishing-boat-on-beach-bangladesh.jpg?s=612x612&w=0&k=20&c=a46laqtwn1PKqXRzOVwUVkPAgzRaVw6NuIbpjIgdjHk=",
+    description:
+      "Drive through coastal roads and hills with unmatched comfort and reliability.",
   },
   {
     id: 3,
     name: "Sylhet",
-    image: "http://plus.unsplash.com/premium_photo-1666865792731-0a2656f2b12c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c3lsaGV0JTJDJTIwYmFuZ2xhZGVzaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=800",
-    description: "Explore tea gardens and waterfalls with seamless car rental service.",
+    image:
+      "http://plus.unsplash.com/premium_photo-1666865792731-0a2656f2b12c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c3lsaGV0JTJDJTIwYmFuZ2xhZGVzaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=800",
+    description:
+      "Explore tea gardens and waterfalls with seamless car rental service.",
   },
   {
     id: 4,
     name: "Cox’s Bazar",
-    image: "http://images.unsplash.com/photo-1635264647809-66e209bf0bbd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q294JUUyJTgwJTk5cyUyMEJhemFyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=800",
-    description: "Cruise along the world’s longest beach with a luxurious drive experience.",
+    image:
+      "http://images.unsplash.com/photo-1635264647809-66e209bf0bbd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q294JUUyJTgwJTk5cyUyMEJhemFyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=800",
+    description:
+      "Cruise along the world’s longest beach with a luxurious drive experience.",
   },
 ];
 
@@ -49,9 +57,12 @@ const TopLocations = () => {
         transition={{ duration: 0.8 }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        <h2 className="text-4xl font-bold mb-3 text-[#16df92]">Top Locations</h2>
+        <h2 className="text-4xl font-bold mb-3 text-[#16df92]">
+          Top Locations
+        </h2>
         <p className="text-gray-400 max-w-2xl mx-auto">
-          Discover our most popular car rental destinations — where every journey begins with style and comfort.
+          Discover our most popular car rental destinations — where every
+          journey begins with style and comfort.
         </p>
       </motion.div>
 
@@ -82,7 +93,9 @@ const TopLocations = () => {
               <h3 className="text-xl font-bold flex items-center gap-2">
                 <FaMapMarkerAlt className="text-[#09764c]" /> {loc.name}
               </h3>
-              <p className="text-gray-300 text-sm mt-1 max-w-xs">{loc.description}</p>
+              <p className="text-gray-300 text-sm mt-1 max-w-xs">
+                {loc.description}
+              </p>
             </div>
           </motion.div>
         ))}

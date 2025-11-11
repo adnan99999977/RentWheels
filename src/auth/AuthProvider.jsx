@@ -67,6 +67,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser ? { ...currentUser } : null);
+      
       setLoading(false);
     });
     return () => unsubscribe();

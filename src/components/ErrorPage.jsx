@@ -4,14 +4,14 @@ import { Link } from "react-router";
 const ErrorPage = () => {
   return (
     <div className="relative w-full h-screen bg-gradient-to-b from-[#0a1821] to-[#07141a] text-white overflow-hidden">
-      {/* Starry Sky */}
+      
       <svg
         aria-labelledby="Starry sky"
         className="absolute top-0 left-0 w-full h-full"
       >
         <title id="svgtitle2">Starry sky</title>
         <g className="all-stars fill-[#F6F5BC]">
-          {/* Animated Stars */}
+         
           {[...Array(50)].map((_, i) => (
             <circle
               key={i}
@@ -23,13 +23,13 @@ const ErrorPage = () => {
             />
           ))}
         </g>
-        {/* Floating Moon */}
+        
         <g className="moon fill-[#D1D5D6] opacity-80 animate-float">
           <circle cx="400" cy="100" r="60" />
         </g>
       </svg>
 
-      {/* Error Content */}
+     
       <div className="absolute top-1/4 right-20 text-right max-w-sm space-y-6">
         <svg aria-labelledby="404" className="w-[350px] h-[140px] mx-auto">
           <title id="svgtitle1">404 Page not found</title>
@@ -56,7 +56,7 @@ const ErrorPage = () => {
         </Link>
       </div>
 
-      {/* Animations */}
+
       <style>
         {`
           @keyframes blink {

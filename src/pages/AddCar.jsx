@@ -26,7 +26,7 @@ const AddCar = () => {
       createdAt: time,
     };
 
-    fetch("http://localhost:5000/cars", {
+    fetch("https://rent-wheels-server.vercel.app/cars", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -139,7 +139,7 @@ const AddCar = () => {
               Location
             </label>
             <input
-            required
+              required
               type="text"
               name="location"
               placeholder="e.g. Dhaka, Bangladesh"
@@ -152,7 +152,7 @@ const AddCar = () => {
               Image URL
             </label>
             <input
-            required
+              required
               type="text"
               name="image"
               placeholder="https://example.com/car.jpg"
@@ -165,7 +165,6 @@ const AddCar = () => {
               Description
             </label>
             <textarea
-            
               name="description"
               placeholder="Write a short description..."
               rows="3"

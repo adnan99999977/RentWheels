@@ -62,15 +62,7 @@ export const router = createBrowserRouter([
         path: "/car-details/:id",
         element: <CarDetails />,
         loader: ({ params }) =>
-          fetch(`http
-
-://localhost:5000
-
-
-
-
-
-/cars/${params.id}`),
+          fetch(`https://rent-wheels-server.vercel.app/cars/${params.id}`),
       },
     ],
   },

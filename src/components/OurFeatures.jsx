@@ -35,7 +35,7 @@ const OurFeatures = () => {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.25, // delay between animations
+        staggerChildren: 0.25,
       },
     },
   };

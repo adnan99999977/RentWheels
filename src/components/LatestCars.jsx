@@ -7,31 +7,29 @@ import Loading from "./Loading";
 const LatestCars = () => {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
-const fetchCars = async (searchText = "") => {
-  setLoading(true);
-  try {
-    // Build the API URL dynamically
-    const baseURL = "http://localhost:5000";
-    const endpoint = searchText
-      ? `/search?search=${searchText}`
-      : "/latest-cars";
+  const fetchCars = async (searchText = "") => {
+    setLoading(true);
+    try {
+      const baseURL = "https://rent-wheels-server.vercel.app";
+      const endpoint = searchText
+        ? `/search?search=${searchText}`
+        : "/latest-cars";
 
-    const url = `${baseURL}${endpoint}`;
+      const url = `${baseURL}${endpoint}`;
 
-    // Fetch data
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error(`Failed to fetch: ${res.status}`);
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(`Failed to fetch: ${res.status}`);
+      }
+
+      const data = await res.json();
+      setCars(data);
+    } catch (err) {
+      console.error("Error fetching cars:", err);
+    } finally {
+      setLoading(false);
     }
-
-    const data = await res.json();
-    setCars(data);
-  } catch (err) {
-    console.error("Error fetching cars:", err);
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   useEffect(() => {
     fetchCars();

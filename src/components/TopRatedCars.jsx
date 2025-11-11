@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaStar } from "react-icons/fa6";
 
-// Static top rated car data
 const topCars = [
   {
     id: 1,
@@ -11,7 +10,8 @@ const topCars = [
     provider: "Elite Rentals",
     rentPerDay: 120,
     rating: 4.9,
-    image: "http://images.unsplash.com/photo-1676744544740-9fd75a5aed85?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHx8&auto=format&fit=crop&q=60&w=800",
+    image:
+      "http://images.unsplash.com/photo-1676744544740-9fd75a5aed85?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHx8&auto=format&fit=crop&q=60&w=800",
   },
   {
     id: 2,
@@ -20,7 +20,8 @@ const topCars = [
     provider: "DriveX",
     rentPerDay: 110,
     rating: 4.8,
-    image: "http://images.unsplash.com/photo-1619362280286-f1f8fd5032ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGJtd3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=800",
+    image:
+      "http://images.unsplash.com/photo-1619362280286-f1f8fd5032ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGJtd3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=800",
   },
   {
     id: 3,
@@ -29,7 +30,8 @@ const topCars = [
     provider: "City Rentals",
     rentPerDay: 50,
     rating: 4.7,
-    image: "http://images.unsplash.com/photo-1637087867446-7c31ca973cd4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM4fHx8ZW58MHx8fHx8&auto=format&fit=crop&q=60&w=800",
+    image:
+      "http://images.unsplash.com/photo-1637087867446-7c31ca973cd4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM4fHx8ZW58MHx8fHx8&auto=format&fit=crop&q=60&w=800",
   },
   {
     id: 4,
@@ -38,7 +40,8 @@ const topCars = [
     provider: "Speed Wheels",
     rentPerDay: 150,
     rating: 4.9,
-    image: "http://images.unsplash.com/photo-1625231334168-35067f8853ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm9yZCUyMG11c3Rhbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=800",
+    image:
+      "http://images.unsplash.com/photo-1625231334168-35067f8853ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm9yZCUyMG11c3Rhbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=800",
   },
 ];
 
@@ -70,7 +73,9 @@ const TopRatedCars = () => {
               />
             </div>
             <div className="p-5 space-y-2">
-              <h3 className="text-xl font-semibold text-[#16df92]">{car.name}</h3>
+              <h3 className="text-xl font-semibold text-[#16df92]">
+                {car.name}
+              </h3>
               <p className="text-gray-300 text-sm">
                 <span className="font-semibold">Category:</span> {car.category}
               </p>
@@ -79,21 +84,23 @@ const TopRatedCars = () => {
               </p>
               <div className="flex justify-between items-center mt-3">
                 <p className="text-lg font-bold text-white">
-                  ${car.rentPerDay}/<span className="text-gray-400 text-sm">day</span>
+                  ${car.rentPerDay}/
+                  <span className="text-gray-400 text-sm">day</span>
                 </p>
                 <div className="flex items-center gap-1">
                   <FaStar className="text-yellow-400" />
-                  <span className="text-gray-300 font-semibold">{car.rating}</span>
+                  <span className="text-gray-300 font-semibold">
+                    {car.rating}
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Hover overlay for more info */}
-            <motion.div
-              className="absolute inset-0 bg-black/70 flex items-center justify-center text-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            >
+            <motion.div className="absolute inset-0 bg-black/70 flex items-center justify-center text-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <p className="text-gray-300 text-sm">
-                Book {car.name} today and enjoy a premium experience with top rated vehicles and trusted providers. Smooth booking, excellent support, and unforgettable rides!
+                Book {car.name} today and enjoy a premium experience with top
+                rated vehicles and trusted providers. Smooth booking, excellent
+                support, and unforgettable rides!
               </p>
             </motion.div>
           </motion.div>

@@ -15,10 +15,8 @@ export default function Video() {
         <source src="/car.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/50" />
 
-      {/* Content */}
       <div className="relative  z-10 text-center flex flex-col items-center justify-center gap-6 px-4 max-w-3xl">
         {/* Main Heading */}
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-300 leading-tight">
