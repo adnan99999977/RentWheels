@@ -137,7 +137,7 @@ const CarDetails = () => {
                    ${
                      car.status === "available"
                        ? "hover:bg-green-700 transition-all px-5 duration-300 outline-2 outline-[#0fca83] cursor-pointer"
-                       : "bg-red-500 cursor-not-allowed"
+                       : "bg-red-400 cursor-not-allowed"
                    }`}
                 disabled={car.status !== "available"}
               >

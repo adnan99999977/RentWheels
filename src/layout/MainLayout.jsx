@@ -1,22 +1,28 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import { Outlet } from 'react-router'
-import Footer from '../components/Footer'
+import React from "react";
+import Navbar from "../components/Navbar";
+import { Outlet } from "react-router";
+import Footer from "../components/Footer";
+import ScrollToTop from "../components/ScrollToTop";
 
 const MainLayout = () => {
   return (
-    <div className='flex flex-col h-screen'>
-        <div>
-            <Navbar/>
-        </div>
-        <div className='flex-1'>
-            <Outlet/>
-        </div>
-        <div>
-            <Footer/>
-        </div>
-    </div>
-  )
-}
+    <div className="flex flex-col h-screen">
+      {/* ScrollToTop keeps scroll position reset on route change */}
+      <ScrollToTop />
 
-export default MainLayout
+      <div>
+        <Navbar />
+      </div>
+
+      <div className="flex-1">
+        <Outlet />
+      </div>
+
+      <div>
+        <Footer />
+      </div>
+    </div>
+  );
+};
+
+export default MainLayout;

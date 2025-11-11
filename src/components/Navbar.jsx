@@ -8,6 +8,7 @@ const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const url =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuGeAGmzS-ybJIKly7mgmnPLtuN-OqxO8FGw&s";
+  console.log(user);
 
   const [drop, setDrop] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -32,6 +33,7 @@ const Navbar = () => {
     isActive
       ? "relative font-semibold text-[#09764c] after:content-[''] after:absolute after:left-0 after:bottom-[-3px] after:w-full after:h-[2px] after:bg-[#09764c]"
       : "relative text-gray-300 hover:text-[#09764c] transition-colors duration-300 after:content-[''] after:absolute after:left-1/2 after:bottom-[-3px] after:w-0 after:h-[2px] after:bg-[#09764c] after:transition-all after:duration-500 after:ease-out hover:after:left-0 hover:after:w-full";
+
 
   return (
     <nav className="fixed top-0 z-100 w-full bg-black/30 backdrop-blur-2xl border-b border-gray-100/20 shadow-sm">
@@ -122,19 +124,32 @@ const Navbar = () => {
             className="lg:w-12 w-10 h-12 rounded-full overflow-hidden border-2 border-gray-200 shadow-md hover:shadow-lg cursor-pointer transition-transform hover:scale-105"
             title={user ? user.displayName : "Guest User"}
           >
-            <img
-              src={user ? user.photoURL : url}
-              alt="User profile"
-              className="w-full h-full object-cover"
-            />
+            {user && user.photoURL ? (
+              <img
+                src={user.photoURL}
+                alt="User profile"
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
+            ) : (
+              <img
+                src={url}
+                alt="Default profile"
+                className="w-full h-full object-cover opacity-70"
+              />
+            )}
           </div>
 
           {/* Profile Dropdown */}
           {drop && (
             <div className="absolute top-16 right-0 w-48 bg-white/50 backdrop-blur-lg border border-gray-100/20 rounded-lg shadow-md divide-y divide-gray-200 z-50">
               <div className="px-4 py-3">
-                <span className="block text-sm text-gray-900">{user?.displayName || "User Name"}</span>
-                <span className="block text-[10px] text-gray-900 truncate">{user?.email || "user@email.com"}</span>
+                <span className="block text-sm text-gray-900">
+                  {user?.displayName || "User Name"}
+                </span>
+                <span className="block text-[10px] text-gray-900 truncate">
+                  {user?.email || "user@email.com"}
+                </span>
               </div>
               <ul className="py-2">
                 <li>
@@ -171,22 +186,38 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/add-car" className={linkClass} onClick={handleMobileMenu}>
+            <NavLink
+              to="/add-car"
+              className={linkClass}
+              onClick={handleMobileMenu}
+            >
               Add Car
             </NavLink>
           </li>
           <li>
-            <NavLink to="/browse-cars" className={linkClass} onClick={handleMobileMenu}>
+            <NavLink
+              to="/browse-cars"
+              className={linkClass}
+              onClick={handleMobileMenu}
+            >
               Browse Cars
             </NavLink>
           </li>
           <li>
-            <NavLink to="/my-bookings" className={linkClass} onClick={handleMobileMenu}>
+            <NavLink
+              to="/my-bookings"
+              className={linkClass}
+              onClick={handleMobileMenu}
+            >
               My Bookings
             </NavLink>
           </li>
           <li>
-            <NavLink to="/my-listings" className={linkClass} onClick={handleMobileMenu}>
+            <NavLink
+              to="/my-listings"
+              className={linkClass}
+              onClick={handleMobileMenu}
+            >
               My Listings
             </NavLink>
           </li>
