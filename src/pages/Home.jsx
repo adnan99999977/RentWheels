@@ -1,18 +1,28 @@
-import React from 'react'
-import Hero from '../components/Hero'
-
+import Hero from "../components/Hero";
+import Vidio from "../components/Vidio";
+import LatestCars from "../components/LatestCars";
+import WhyRentWithUs from "../components/WhyRentUs";
+import TopRatedCars from "../components/TopRatedCars";
+import Slider from "../components/Slider";
 
 const Home = () => {
-  return (<div
- >
-    <div className=''>
-      <Hero/>
+  return (
+    <div>
+      <div className="">
+        <Hero />
+      </div>
+      <div className="bg-black h-[80%]">
+        <LatestCars />
+        <Slider/>
+      <TopRatedCars/>
+        <Vidio />
+      <div className="hidden sm:block">
+        <WhyRentWithUs/>
+      </div>
+      </div>
+     
     </div>
-     <div  className='bg-black h-screen'>
-    
-    </div>
-    </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

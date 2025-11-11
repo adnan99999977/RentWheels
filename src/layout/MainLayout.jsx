@@ -7,7 +7,6 @@ import ScrollToTop from "../components/ScrollToTop";
 const MainLayout = () => {
   return (
     <div className="flex flex-col h-screen">
-      {/* ScrollToTop keeps scroll position reset on route change */}
       <ScrollToTop />
 
       <div>

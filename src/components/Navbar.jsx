@@ -3,12 +3,16 @@ import { NavLink } from "react-router";
 import { AuthContext } from "../auth/AuthContext";
 import { IoLogInOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
+import { MdOutlineLightMode } from "react-icons/md";
+import { CiDark } from "react-icons/ci";
+{/* <CiDark /> */}
+
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const url =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuGeAGmzS-ybJIKly7mgmnPLtuN-OqxO8FGw&s";
-  console.log(user);
+
 
   const [drop, setDrop] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -91,7 +95,10 @@ const Navbar = () => {
             </NavLink>
           </li>
         </ul>
-
+        {/* theme toggle */}
+       <div>
+       <MdOutlineLightMode color="white" />
+       </div>
         {/* Auth Buttons & Profile */}
         <div className="flex items-center gap-4 relative" ref={dropdownRef}>
           {!user ? (

@@ -9,9 +9,7 @@ import ScrollToTop from "./components/ScrollToTop";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      {/* Router context first */}
       <RouterProvider router={router}>
-        {/* ScrollToTop must be inside Router context */}
         <ScrollToTop />
       </RouterProvider>
     </AuthProvider>

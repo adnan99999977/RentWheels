@@ -64,14 +64,13 @@ const AuthProvider = ({ children }) => {
   };
 
   //  Auth State
- useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser ? { ...currentUser } : null);
-    setLoading(false);
-  });
-  return () => unsubscribe();
-}, []);
-
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser ? { ...currentUser } : null);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const authInfo = {
     user,

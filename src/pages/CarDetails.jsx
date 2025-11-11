@@ -37,7 +37,6 @@ const CarDetails = () => {
           },
         });
 
-        // Navigate after toast duration
         setTimeout(() => {
           navigate("/my-bookings");
         }, 2500);
@@ -101,7 +100,9 @@ const CarDetails = () => {
                   {car.category}
                 </div>
                 <div>
-                  <span className="font-semibold text-white">Rent per Day:</span>{" "}
+                  <span className="font-semibold text-white">
+                    Rent per Day:
+                  </span>{" "}
                   ${car.rentPerDay}
                 </div>
                 <div>
@@ -130,7 +131,6 @@ const CarDetails = () => {
                 Added on: <span className="text-white">{car.createdAt}</span>
               </div>
 
-              {/* Only button, no Link */}
               <button
                 onClick={handleBooking}
                 className={`relative z-10 flex items-center justify-center px-4 py-2 rounded-full font-semibold text-white

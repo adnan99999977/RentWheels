@@ -15,7 +15,7 @@ const Hero = () => {
   bg-center 
   bg-no-repeat 
   w-full 
-  min-h-[500px] md:min-h-[560px] lg:min-h-[600px] 
+  min-h-[500px] md:min-h-[560px] lg:min-h-[580px] 
   flex flex-col 
   justify-center 
   items-center 
