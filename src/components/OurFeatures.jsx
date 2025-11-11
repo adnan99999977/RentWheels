@@ -41,7 +41,7 @@ const OurFeatures = () => {
   };
 
   return (
-    <div className="bg-black text-white py-16 px-6 md:px-20 overflow-hidden">
+    <div className="bg-black text-white pt-10 pb-8 px-6 md:px-30 overflow-hidden">
       {/* Header */}
       <motion.div
         className="text-center mb-12"
@@ -81,7 +81,7 @@ const OurFeatures = () => {
             </div>
             <div>
               <h3 className="font-bold text-lg mb-1">First Class Services</h3>
-              <p className="text-gray-300 text-sm">
+              <p className="text-gray-300 text-[10px]">
                 Where luxury meets exceptional care, creating unforgettable
                 moments.
               </p>
@@ -99,7 +99,7 @@ const OurFeatures = () => {
             </div>
             <div>
               <h3 className="font-bold text-lg mb-1">24/7 Road Assistance</h3>
-              <p className="text-gray-300 text-sm">
+              <p className="text-gray-300 text-[10px]">
                 Reliable support when you need it most, keeping you on the move
                 with confidence and peace of mind.
               </p>
@@ -109,13 +109,13 @@ const OurFeatures = () => {
 
         {/* Car Image */}
         <motion.div
-          className="w-full md:w-1/3 flex justify-center"
+          className="w-full md:w-2/3 flex justify-center"
           variants={bottomVariant}
         >
           <img
             src="/car.png"
             alt="Car"
-            className="w-[90%] md:w-full object-contain drop-shadow-2xl"
+            className="w-[100%] md:w-full object-contain drop-shadow-2xl"
           />
         </motion.div>
 
@@ -135,7 +135,7 @@ const OurFeatures = () => {
             </div>
             <div>
               <h3 className="font-bold text-lg mb-1">Quality in Minimum</h3>
-              <p className="text-gray-300 text-sm">
+              <p className="text-gray-300 text-[10px]">
                 Unlocking affordable brilliance while elevating quality for
                 maximum value.
               </p>
@@ -155,7 +155,7 @@ const OurFeatures = () => {
               <h3 className="font-bold text-lg mb-1">
                 Free Pick-Up & Drop-Off
               </h3>
-              <p className="text-gray-300 text-sm">
+              <p className="text-gray-300 text-[10px]">
                 Enjoy free pickup and drop-off services, adding an extra layer
                 of ease to your car rental experience.
               </p>

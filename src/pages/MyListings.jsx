@@ -7,10 +7,10 @@ const MyListings = () => {
   const { user } = useContext(AuthContext);
   const [listings, setListings] = useState([]);
   const [selectedCar, setSelectedCar] = useState(null);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user?.email) {
+    {
       fetch(`http://localhost:5000/cars?ProviderEmail=${user.email}`)
         .then((res) => res.json())
         .then((data) => setListings(data))
@@ -19,7 +19,6 @@ const MyListings = () => {
     }
   }, [user?.email]);
 
-   
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -67,7 +66,11 @@ const MyListings = () => {
 
     fetch(`http://localhost:5000/cars/${selectedCar._id}`, {
       method: "PUT",
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${user.accessToken}`,
+      },
+
       body: JSON.stringify(modalData),
     })
       .then((res) => res.json())
@@ -86,10 +89,9 @@ const MyListings = () => {
       });
     setSelectedCar(null);
   };
-   if (loading) {
-    return <Loading />; 
+  if (loading) {
+    return <Loading />;
   }
-
 
   return (
     <div className="page-section min-h-screen p-6 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white">

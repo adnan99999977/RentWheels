@@ -14,7 +14,7 @@ import ErrorPage from "../components/ErrorPage";
 export const router = createBrowserRouter([
   {
     path: "/",
-     errorElement:<ErrorPage/>,
+    errorElement: <ErrorPage />,
     element: <MainLayout />,
     children: [
       {
@@ -62,7 +62,15 @@ export const router = createBrowserRouter([
         path: "/car-details/:id",
         element: <CarDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/cars/${params.id}`),
+          fetch(`http
+
+://localhost:5000
+
+
+
+
+
+/cars/${params.id}`),
       },
     ],
   },

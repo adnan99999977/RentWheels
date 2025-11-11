@@ -7,22 +7,31 @@ import Loading from "./Loading";
 const LatestCars = () => {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
+const fetchCars = async (searchText = "") => {
+  setLoading(true);
+  try {
+    // Build the API URL dynamically
+    const baseURL = "http://localhost:5000";
+    const endpoint = searchText
+      ? `/search?search=${searchText}`
+      : "/latest-cars";
 
-  const fetchCars = async (searchText = "") => {
-    setLoading(true);
-    try {
-      const url = searchText
-        ? `http://localhost:5000/search?search=${searchText}`
-        : "http://localhost:5000/latest-cars";
-      const res = await fetch(url);
-      const data = await res.json();
-      setCars(data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
+    const url = `${baseURL}${endpoint}`;
+
+    // Fetch data
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch: ${res.status}`);
     }
-  };
+
+    const data = await res.json();
+    setCars(data);
+  } catch (err) {
+    console.error("Error fetching cars:", err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchCars();
@@ -102,7 +111,10 @@ const LatestCars = () => {
                   <span className="text-gray-400 text-sm">day</span>
                 </p>
 
-                <Link to={`/car-details/${car._id}`} className="w-full sm:w-auto">
+                <Link
+                  to={`/car-details/${car._id}`}
+                  className="w-full sm:w-auto"
+                >
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -112,21 +124,19 @@ const LatestCars = () => {
                   </motion.button>
                 </Link>
               </div>
-             
             </div>
           </motion.div>
         ))}
       </div>
-        <Link
-              to="/browse-cars"
-              className="relative hidden lg:flex w-[17%] mx-auto mt-10 px-4 py-2 border-2 border-[#09764c] text-[#09764c] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out"
-            >
-              <span className="absolute inset-0 bg-[#09764c] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-              <span className="relative z-10 flex items-center gap-2 group-hover:text-white">
-              
-                Browse All Cars
-              </span>
-            </Link>
+      <Link
+        to="/browse-cars"
+        className="relative hidden lg:flex w-[17%] mx-auto mt-10 px-4 py-2 border-2 border-[#09764c] text-[#09764c] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out"
+      >
+        <span className="absolute inset-0 bg-[#09764c] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+        <span className="relative z-10 flex items-center gap-2 group-hover:text-white">
+          Browse All Cars
+        </span>
+      </Link>
     </section>
   );
 };

@@ -1,20 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+@import url("http://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
 @plugin "daisyui" {
   themes: dark --default, light --prefersdark;
 }
 
-*{
-   font-family: "Orbitron", sans-serif;
+* {
+  font-family: "Orbitron", sans-serif;
 }
 
-.gray-color{
+.gray-color {
   color: gray;
 }
 
 .page-section {
   @apply bg-black pt-30 relative py-12 px-6 md:px-20 min-h-screen overflow-hidden;
-
 }
-

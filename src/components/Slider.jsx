@@ -9,7 +9,7 @@ const slides = [
     description:
       "Experience premium comfort and style with our luxury car collection — available 24/7 for your special moments.",
     image:
-      "https://4kwallpapers.com/images/walls/thumbs_2t/21676.jpg",
+      "/slide1.jpg",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const slides = [
     description:
       "Choose from a wide range of modern vehicles with flexible pricing — making your dream drive possible.",
     image:
-      "https://4kwallpapers.com/images/walls/thumbs_2t/23957.jpg",
+      "/slide2.jpg",
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const slides = [
     description:
       "From business trips to weekend adventures — rent a car that fits your lifestyle perfectly.",
     image:
-      "https://4kwallpapers.com/images/walls/thumbs_2t/23965.jpg",
+      "/slide3.jpg",
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ const slides = [
     description:
       "Get reliable vehicles, clean interiors, and professional support — all at a price that suits you.",
     image:
-      "https://4kwallpapers.com/images/walls/thumbs_2t/10685.jpg",
+      "/slide4.jpg",
   },
   {
     id: 5,
@@ -41,7 +41,7 @@ const slides = [
     description:
       "Easy booking, instant confirmation, and quick delivery — your next ride is just a click away.",
     image:
-      "https://4kwallpapers.com/images/walls/thumbs_3t/22810.jpg",
+      "/slide5.jpg",
   },
 ];
 
@@ -68,24 +68,28 @@ const Slider = () => {
     <section className="relative w-full max-w-[1200px] mx-auto h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl">
       <AnimatePresence mode="wait">
         <motion.div
-          key={slides[current].id}
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.8 }}
-          className="absolute inset-0 w-full h-full"
-        >
-          <img
-            src={slides[current].image}
-            alt={slides[current].title}
-            className="w-full h-full object-cover rounded-xl"
-          />
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <h2 className="text-gray-400 text-xl md:text-2xl w-[80%] font-bold drop-shadow-lg tracking-wide uppercase">
-              {slides[current].description}
-            </h2>
-          </div>
-        </motion.div>
+  key={slides[current].id}
+  initial={{ opacity: 0, scale: 1.05 }}
+  animate={{ opacity: 1, scale: 1 }}
+  exit={{ opacity: 0, scale: 0.95 }}
+  transition={{ duration: 0.8 }}
+  className="absolute inset-0 w-full h-full"
+>
+  <img
+    src={slides[current].image}
+    alt={slides[current].title}
+    className="w-[90%] h-[88%] mx-auto object-cover rounded-xl"
+  />
+  <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center px-6 md:px-12 text-center">
+    <h1 className="text-white text-2xl md:text-4xl font-extrabold drop-shadow-lg mb-4">
+      {slides[current].title}
+    </h1>
+    <p className="text-gray-200 text-md md:text-lg max-w-3xl leading-relaxed drop-shadow-md">
+      {slides[current].description}
+    </p>
+  </div>
+</motion.div>
+
       </AnimatePresence>
 
       {/* Navigation */}

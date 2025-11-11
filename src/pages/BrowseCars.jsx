@@ -5,18 +5,18 @@ import Loading from "../components/Loading";
 
 const BrowseCars = () => {
   const [cars, setCars] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     fetch("http://localhost:5000/cars")
       .then((res) => res.json())
       .then((data) => setCars(data))
-      .finally(() => setLoading(false)); 
+      .finally(() => setLoading(false));
   }, []);
 
   if (loading) {
-    return <Loading />; 
+    return <Loading />;
   }
 
   return (

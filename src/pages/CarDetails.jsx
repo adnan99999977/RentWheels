@@ -15,13 +15,15 @@ const CarDetails = () => {
     };
 
     // Booking save
-    fetch(`http://localhost:5000/booking`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(bookingData),
-    })
+    fetch(`http://localhost:5000/booking`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         toast.success(" Booking Confirmed!", {
@@ -58,11 +60,13 @@ const CarDetails = () => {
       });
 
     // Car status update
-    fetch(`http://localhost:5000/cars/${car._id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status: "Unavailable" }),
-    })
+    fetch(`http://localhost:5000/cars/${car._id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "Unavailable" }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => console.log("Updated car status:", data))
       .catch((err) => console.error(err));

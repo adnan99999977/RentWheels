@@ -11,7 +11,7 @@ const topCars = [
     provider: "Elite Rentals",
     rentPerDay: 120,
     rating: 4.9,
-    image: "https://images.unsplash.com/photo-1676744544740-9fd75a5aed85?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHx8&auto=format&fit=crop&q=60&w=800",
+    image: "http://images.unsplash.com/photo-1676744544740-9fd75a5aed85?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHx8&auto=format&fit=crop&q=60&w=800",
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const topCars = [
     provider: "DriveX",
     rentPerDay: 110,
     rating: 4.8,
-    image: "https://images.unsplash.com/photo-1619362280286-f1f8fd5032ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGJtd3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=800",
+    image: "http://images.unsplash.com/photo-1619362280286-f1f8fd5032ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGJtd3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=800",
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const topCars = [
     provider: "City Rentals",
     rentPerDay: 50,
     rating: 4.7,
-    image: "https://images.unsplash.com/photo-1637087867446-7c31ca973cd4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM4fHx8ZW58MHx8fHx8&auto=format&fit=crop&q=60&w=800",
+    image: "http://images.unsplash.com/photo-1637087867446-7c31ca973cd4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM4fHx8ZW58MHx8fHx8&auto=format&fit=crop&q=60&w=800",
   },
   {
     id: 4,
@@ -38,13 +38,13 @@ const topCars = [
     provider: "Speed Wheels",
     rentPerDay: 150,
     rating: 4.9,
-    image: "https://images.unsplash.com/photo-1625231334168-35067f8853ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm9yZCUyMG11c3Rhbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=800",
+    image: "http://images.unsplash.com/photo-1625231334168-35067f8853ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm9yZCUyMG11c3Rhbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=800",
   },
 ];
 
 const TopRatedCars = () => {
   return (
-    <section className="py-16 px-6 w-[85%] mx-auto md:px-16 bg-black text-white">
+    <section className="py-16 px-6 w-[85%] md:w-full mx-auto md:px-16 bg-black text-white">
       <motion.h2
         className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-[#16df92] drop-shadow-lg"
         initial={{ opacity: 0, y: -20 }}

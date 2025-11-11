@@ -7,7 +7,7 @@ import { CiLogout } from "react-icons/ci";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const url =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuGeAGmzS-ybJIKly7mgmnPLtuN-OqxO8FGw&s";
+    "http://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuGeAGmzS-ybJIKly7mgmnPLtuN-OqxO8FGw&s";
 
 
   const [drop, setDrop] = useState(false);

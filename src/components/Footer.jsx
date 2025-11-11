@@ -52,10 +52,10 @@ const Footer = () => {
 
           <div className="flex space-x-3 pt-2">
             {[
-              { Icon: FaFacebookF, url: "https://www.facebook.com" },
-              { Icon: FaXTwitter, url: "https://www.twitter.com" },
-              { Icon: FaInstagram, url: "https://www.instagram.com" },
-              { Icon: FaYoutube, url: "https://www.youtube.com" },
+              { Icon: FaFacebookF, url: "http://www.facebook.com" },
+              { Icon: FaXTwitter, url: "http://www.twitter.com" },
+              { Icon: FaInstagram, url: "http://www.instagram.com" },
+              { Icon: FaYoutube, url: "http://www.youtube.com" },
             ].map(({ Icon, url }, i) => (
               <button
                 key={i}

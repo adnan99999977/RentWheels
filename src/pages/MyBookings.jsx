@@ -1,76 +1,77 @@
-import  { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { motion, AnimatePresence } from "framer-motion";
 import { AuthContext } from "../auth/AuthContext";
 import Loading from "../components/Loading";
 
-
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
-  const {user} = useContext(AuthContext)
-  const [loading, setLoading] = useState(true); 
+  const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`http://localhost:5000/booking`)
       .then((res) => res.json())
       .then((data) => setBookings(data))
       .catch((err) => console.error(err))
-       .finally(() => setLoading(false));;
+      .finally(() => setLoading(false));
   }, []);
 
-  
- 
-
   const handleCancel = (id) => {
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#09764c",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // 1️⃣ Get the booking info first
-      const bookingToCancel = bookings.find((b) => b._id === id);
-      const carId = bookingToCancel?.carId; // assume this field exists in booking doc
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#09764c",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // 1️⃣ Get the booking info first
+        const bookingToCancel = bookings.find((b) => b._id === id);
+        const carId = bookingToCancel?.carId; // assume this field exists in booking doc
 
-      // 2️⃣ Delete booking from DB
-      fetch(`http://localhost:5000/booking/${id}`, { method: "DELETE" })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success) {
-            Swal.fire("Deleted!", data.message, "success");
-            setBookings((prev) => prev.filter((car) => car._id !== id));
-
-            // 3️⃣ Update car status back to available
-            if (carId) {
-              fetch(`http://localhost:5000/cars/${carId}`, {
-                method: "PATCH",
-                headers: {
-                  "Content-Type": "application/json",
-                  authorization: `Bearer ${user.accessToken}`,
-                },
-                body: JSON.stringify({ status: "available" }),
-              })
-                .then((res) => res.json())
-                .then((data) => {
-                  console.log("Updated car status:", data);
-                })
-                .catch((err) => console.error(err));
-            }
-          } else {
-            Swal.fire("Error!", data.message, "error");
-          }
+        //  Delete booking from DB
+        fetch(`http://localhost:5000/booking/${id}`, {
+          method: "DELETE",
+          headers: {
+            authorization: `Bearer ${user.accessToken}`,
+          },
         })
-        .catch((err) => console.error(err));
-    }
-  });
-};
-  
-   if (loading) {
-    return <Loading />; 
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              Swal.fire("Deleted!", data.message, "success");
+              setBookings((prev) => prev.filter((car) => car._id !== id));
+
+              //  Update car status back to available
+              if (carId) {
+                fetch(`http://localhost:5000/cars/${carId}`, {
+                  method: "PATCH",
+                  headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${user.accessToken}`,
+                  },
+                  body: JSON.stringify({ status: "available" }),
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    console.log("Updated car status:", data);
+                  })
+                  .catch((err) => console.error(err));
+              }
+            } else {
+              Swal.fire("Error!", data.message, "error");
+            }
+          })
+          .catch((err) => console.error(err));
+      }
+    });
+  };
+
+  if (loading) {
+    return <Loading />;
   }
 
   return (
