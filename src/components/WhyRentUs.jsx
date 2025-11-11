@@ -37,7 +37,7 @@ const WhyRentWithUs = () => {
   return (
     <section className="py-16 relative px-4 md:px-16 bg-black text-white">
       <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-[#09764c] drop-shadow-lg">
-        Why Rent With Us
+       Our Actions Your Benefits
       </h2>
 
       <div className="lg:flex flex-col sm:flex-row gap-4 lg:h-[220px] w-full ">

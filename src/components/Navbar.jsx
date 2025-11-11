@@ -3,10 +3,6 @@ import { NavLink } from "react-router";
 import { AuthContext } from "../auth/AuthContext";
 import { IoLogInOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
-import { MdOutlineLightMode } from "react-icons/md";
-import { CiDark } from "react-icons/ci";
-{/* <CiDark /> */}
-
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -95,10 +91,7 @@ const Navbar = () => {
             </NavLink>
           </li>
         </ul>
-        {/* theme toggle */}
-       <div>
-       <MdOutlineLightMode color="white" />
-       </div>
+
         {/* Auth Buttons & Profile */}
         <div className="flex items-center gap-4 relative" ref={dropdownRef}>
           {!user ? (
@@ -149,12 +142,12 @@ const Navbar = () => {
 
           {/* Profile Dropdown */}
           {drop && (
-            <div className="absolute top-16 right-0 w-48 bg-white/50 backdrop-blur-lg border border-gray-100/20 rounded-lg shadow-md divide-y divide-gray-200 z-50">
+            <div className="absolute top-16 right-0 w-48 bg-gray-500 backdrop-blur-lg border border-gray-100/20 rounded-lg shadow-md divide-y divide-gray-200 z-50">
               <div className="px-4 py-3">
-                <span className="block text-sm text-gray-900">
+                <span className="block text-sm text-black">
                   {user?.displayName || "User Name"}
                 </span>
-                <span className="block text-[10px] text-gray-900 truncate">
+                <span className="block text-[10px] text-black truncate">
                   {user?.email || "user@email.com"}
                 </span>
               </div>
