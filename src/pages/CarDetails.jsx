@@ -1,69 +1,116 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { Toaster, toast } from "sonner";
 import { AuthContext } from "../auth/AuthContext";
+import Lottie from "lottie-react";
+import confirmAnimation from "../assets/animations/success.json"; 
 
 const CarDetails = () => {
   const car = useLoaderData();
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  console.log(user);
+  const [showConfirm, setShowConfirm] = useState(false);
 
- const handleBooking = async () => {
-  if (!user) {
-    toast.error("Please login to book a car!");
-    return;
-  }
-
-  try {
-    const bookingData = {
-      carId: car._id, 
-      carName: car.carName,
-      category: car.category,
-      rentPerDay: car.rentPerDay,
-      location: car.location,
-      image: car.image,
-      providerName: car.providerName,
-      providerEmail: car.providerEmail,
-      totalAmount: car.rentPerDay, // optional
-      bookingStatus: "Active",
-      createdAt: new Date().toISOString(),
-    };
-
-    const token = user.accessToken;
-
-    const bookingRes = await fetch(
-      `https://rent-wheels-server.vercel.app/booking`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(bookingData),
-      }
-    );
-
-    const bookingResult = await bookingRes.json();
-
-    if (!bookingRes.ok || bookingResult.success === false) {
-      toast.error("Booking Failed: " + (bookingResult.message || "Unknown"));
+  const handleBooking = async () => {
+    if (!user) {
+      toast.error("Please login to book a car!");
       return;
     }
 
-    toast.success("✅ Booking Confirmed!", {
-      description: "Your car is now reserved successfully!",
-    });
+    
+    setShowConfirm(true);
+  };
 
-    setTimeout(() => navigate("/my-bookings"), 2000);
-  } catch (err) {
-    console.error("Booking error:", err);
-    toast.error("Booking failed. Please try again.");
-  }
-};
+  const confirmBooking = async () => {
+    setShowConfirm(false);
+
+    try {
+      const bookingData = {
+        carId: car._id,
+        carName: car.carName,
+        category: car.category,
+        rentPerDay: car.rentPerDay,
+        location: car.location,
+        image: car.image,
+        providerName: car.providerName,
+        providerEmail: car.providerEmail,
+        totalAmount: car.rentPerDay,
+        bookingStatus: "Active",
+        createdAt: new Date().toISOString(),
+      };
+
+      const token = user.accessToken;
+
+      const bookingRes = await fetch(
+        `https://rent-wheels-server.vercel.app/booking`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(bookingData),
+        }
+      );
+
+      const bookingResult = await bookingRes.json();
+
+      if (!bookingRes.ok || bookingResult.success === false) {
+        toast.error("Booking Failed: " + (bookingResult.message || "Unknown"));
+        return;
+      }
+
+      toast.success(" Booking Confirmed!", {
+        description: "Your car is now reserved successfully!",
+        position: "top-center",
+          duration: 3000,
+          style: {
+            background: "#09964c",
+            color: "#fff",
+            borderRadius: "12px",
+            border: "1px solid rgba(255,255,255,0.1)",
+            backdropFilter: "blur(40px)",
+          },
+      });
+
+      setTimeout(() => navigate("/my-bookings"), 2000);
+    } catch (err) {
+      console.error("Booking error:", err);
+      toast.error("Booking failed. Please try again.");
+    }
+  };
+
   return (
-    <div className="page-section">
+    <div className="page-section relative">
       <Toaster richColors position="top-center" />
+
+     
+      {showConfirm && (
+        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center">
+          <div className="bg-gray-900/80 p-6 rounded-3xl text-center border border-white/10 backdrop-blur-xl shadow-xl">
+            <div className="w-52 mx-auto">
+              <Lottie animationData={confirmAnimation} loop={false} />
+            </div>
+            <h2 className="text-2xl font-semibold text-white mb-4">
+              Confirm Your Booking
+            </h2>
+            <div className="flex gap-4 justify-center">
+              <button
+                onClick={confirmBooking}
+                className="bg-[#09764c] hover:bg-green-700 px-6 py-2 rounded-full text-white font-semibold"
+              >
+                Yes, Confirm
+              </button>
+              <button
+                onClick={() => setShowConfirm(false)}
+                className="bg-gray-500 hover:bg-gray-600 px-6 py-2 rounded-full text-white font-semibold"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
         <div className="relative w-full max-w-5xl bg-white/5 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl overflow-hidden group transition-transform duration-500 hover:scale-[1.02]">
@@ -93,9 +140,7 @@ const CarDetails = () => {
                   {car.category}
                 </div>
                 <div>
-                  <span className="font-semibold text-white">
-                    Rent per Day:
-                  </span>{" "}
+                  <span className="font-semibold text-white">Rent per Day:</span>{" "}
                   ${car.rentPerDay}
                 </div>
                 <div>
@@ -103,7 +148,9 @@ const CarDetails = () => {
                   {car.location}
                 </div>
                 <div>
-                  <span className="font-semibold rounded-full text-white">Status:</span>{" "}
+                  <span className="font-semibold rounded-full text-white">
+                    Status:
+                  </span>{" "}
                   <span
                     className={`font-bold ${
                       car.status === "available"

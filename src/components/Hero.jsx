@@ -73,9 +73,9 @@ const Hero = () => {
               Hit the Road!
             </Link>
           </motion.button>
-          <div class="absolute -bottom-19 left-1/2 -translate-x-1/2 animate-bounce">
+          <div className="absolute -bottom-19 left-1/2 -translate-x-1/2 animate-bounce">
             <svg
-              class="w-6 h-6 text-green-500"
+              className="w-6 h-6 text-green-500"
               fill="none"
               stroke="currentColor"
               stroke-width="2"

@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../auth/AuthContext";
 import { Toaster, toast } from "sonner";
 
 const AddCar = () => {
   const { user } = useContext(AuthContext);
+  const [showBlur, setShowBlur] = useState(false);
 
   const handleAddCar = (e) => {
     e.preventDefault();
@@ -37,18 +38,27 @@ const AddCar = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("Car added:", data);
+
+        setShowBlur(true);
+
         toast.success("Car Added Successfully!", {
           description: "Your car is now live on the marketplace.",
           position: "top-center",
-          duration: 3000,
+          duration: 2500,
           style: {
-            background: "#09964c",
+            background: "rgba(9,150,76,0.9)",
             color: "#fff",
             borderRadius: "12px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255,255,255,0.2)",
+            backdropFilter: "blur(25px)",
+            WebkitBackdropFilter: "blur(25px)",
+            boxShadow: "0 0 20px rgba(0,0,0,0.2)",
           },
+          onAutoClose: () => setShowBlur(false),
         });
+
+        setTimeout(() => setShowBlur(false), 2500);
+
         e.target.reset();
       })
       .catch((err) => {
@@ -70,15 +80,22 @@ const AddCar = () => {
 
   return (
     <div className="page-section relative flex justify-center items-center">
-      <Toaster richColors position="top-center" />
+      <Toaster
+        richColors
+        position="top-center"
+        toastOptions={{ style: { zIndex: 9999 } }}
+      />
 
-      {/* Background shapes */}
+      {showBlur && (
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-md transition-all duration-300 z-50"></div>
+      )}
+
       <div className="absolute top-62 -right-82 w-[800px] h-[420px] bg-gradient-to-br animate-pulse from-[#09964c]/20 to-[#09964c]/5 rounded-full blur-2xl opacity-80"></div>
       <div className="absolute -top-24 -left-60 w-[600px] h-[680px] bg-gradient-to-tr animate-pulse from-[#939e9c]/20 to-[#939e9c]/5 rounded-[50%_20%_50%_20%] blur-2xl rotate-12"></div>
       <div className="absolute -bottom-1 -bottom-80 w-[420px] h-[500px] bg-gradient-to-l from-[#939e9c]/15 to-[#09964c]/5 rounded-[30%_60%_40%_70%] blur-2xl rotate-6"></div>
       <div className="absolute bottom-10 left-10 w-[300px] h-[200px] bg-gradient-to-l from-[#939e9c]/15 to-[#09964c]/5 rounded-full blur-xl rotate-6"></div>
 
-      <div className="bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl rounded-2xl p-8 w-full max-w-3xl">
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl rounded-2xl p-8 w-full max-w-3xl z-50">
         <h2 className="text-3xl font-semibold text-center text-white mb-10 tracking-wide">
           Add a New Car
         </h2>

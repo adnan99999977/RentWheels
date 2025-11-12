@@ -36,7 +36,7 @@ const LatestCars = () => {
       return;
     }
 
-    fetch(`https://rent-wheels-server.vercel.app/search?search=${trimmedText}`)
+  fetch(`https://rent-wheels-server.vercel.app/search?search=${trimmedText}`)
       .then((res) => res.json())
       .then((data) => setCars(data));
   };
