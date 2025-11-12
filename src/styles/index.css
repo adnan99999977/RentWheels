@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Kite+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
 @import "tailwindcss";
 @plugin "daisyui";
 @plugin "daisyui" {
@@ -6,8 +6,8 @@
 }
 
 * {
-   font-family: "Kite One", sans-serif;
-   font-weight: 900;
+   font-family: "Bruno Ace", sans-serif;
+   font-weight: 700;
 }
 
 .gray-color {
