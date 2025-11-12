@@ -6,6 +6,7 @@ import TopRatedCars from "../components/TopRatedCars";
 import Slider from "../components/Slider";
 import OurFeatures from "../components/OurFeatures";
 import TopLocations from "../components/Locations";
+import TestimonialMarquee from "../components/TestimonialMarquee";
 
 const Home = () => {
   return (
@@ -32,6 +33,9 @@ const Home = () => {
        </div>
         <div className="hidden sm:block">
           <WhyRentWithUs />
+        </div>
+        <div>
+          <TestimonialMarquee/>
         </div>
       </div>
     </div>

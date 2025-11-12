@@ -39,7 +39,7 @@ const Footer = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-gray-800 pb-10">
         {/* Info Section */}
         <div className="space-y-5 relative z-10">
-          <p className="font-bold border border-gray-300 w-60 px-4 py-1 text-lg lg:text-2xl flex items-center gap-1 text-center rounded-full">
+          <p className="font-bold w-60 px-4 py-1 text-lg lg:text-2xl flex items-center gap-1 text-center rounded-full">
             <span className="text-gray-300">RENT</span>
             <span className="text-[#09764c]">WHEELS</span>
           </p>

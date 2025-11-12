@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 export default function Video() {
   return (
-    <section className="relative border  h-[560px] lg:h-screen w-[99%] mx-auto  flex items-center justify-center overflow-hidden  lg:rounded-none">
+    <section className="relative   h-[560px] lg:h-screen w-[99%] mx-auto  flex items-center justify-center overflow-hidden  lg:rounded-none">
       {/* Background Video */}
       <video
         autoPlay

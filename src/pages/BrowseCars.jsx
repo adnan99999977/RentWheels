@@ -75,8 +75,8 @@ const BrowseCars = () => {
                 <span
                   className={`font-bold ${
                     car.status === "available"
-                      ? "text-[#003421] bg-[#16df92c0] px-2 rounded-full"
-                      : "text-[#300305] bg-[#eb5555f8] px-2 rounded-full"
+                      ? "text-[#003421] bg-[#16df92c0] px-3 rounded-full"
+                      : "text-[#300305] bg-[#eb5555f8] px-3 rounded-full"
                   }`}
                 >
                   {car.status.charAt(0).toUpperCase() + car.status.slice(1)}

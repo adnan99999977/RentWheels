@@ -51,7 +51,7 @@ const Navbar = () => {
             </svg>
           </div>
 
-          <NavLink className="font-bold text-lg lg:text-2xl flex items-center gap-1">
+          <NavLink className="font-bold  title text-lg lg:text-2xl flex items-center gap-1">
             <span className="text-gray-300">RENT</span>
             <span className="text-[#09764c]">WHEELS</span>
           </NavLink>

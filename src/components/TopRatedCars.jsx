@@ -5,7 +5,7 @@ import { FaStar } from "react-icons/fa6";
 const topCars = [
   {
     id: 1,
-    name: "Lambo Huracan ",
+    name: "Lambo Huracan",
     category: "Luxury",
     provider: "Elite Rentals",
     rentPerDay: 120,
@@ -25,7 +25,7 @@ const topCars = [
   },
   {
     id: 3,
-    name: "porsche",
+    name: "Porsche",
     category: "Sedan",
     provider: "City Rentals",
     rentPerDay: 50,
@@ -45,6 +45,29 @@ const topCars = [
   },
 ];
 
+// Motion Variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hover: { scale: 1.05, transition: { type: "spring", stiffness: 120 } },
+};
+
+const imgVariants = {
+  hover: { scale: 1.1, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const overlayVariants = {
+  hover: { opacity: 1, transition: { duration: 0.5, ease: "easeInOut" } },
+};
+
 const TopRatedCars = () => {
   return (
     <section className="py-16 px-6 w-[85%] md:w-full mx-auto md:px-16 bg-black text-white">
@@ -57,21 +80,28 @@ const TopRatedCars = () => {
         Top Rated Cars
       </motion.h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {topCars.map((car, index) => (
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        {topCars.map((car) => (
           <motion.div
             key={car.id}
             className="bg-gray-800/60 backdrop-blur-md rounded-2xl shadow-lg overflow-hidden cursor-pointer relative group"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 120, damping: 15 }}
+            variants={cardVariants}
+            whileHover="hover"
           >
-            <div className="overflow-hidden h-56">
+            <div className="overflow-hidden h-56 rounded-t-2xl">
               <motion.img
                 src={car.image}
                 alt={car.name}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                className="w-full h-full object-cover"
+                variants={imgVariants}
               />
             </div>
+
             <div className="p-5 space-y-2">
               <h3 className="text-xl font-semibold text-[#16df92]">
                 {car.name}
@@ -96,7 +126,11 @@ const TopRatedCars = () => {
               </div>
             </div>
 
-            <motion.div className="absolute inset-0 bg-black/70 flex items-center justify-center text-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            {/* Hover Overlay */}
+            <motion.div
+              className="absolute inset-0 bg-black/70 flex items-center justify-center text-center p-6 opacity-0 rounded-2xl"
+              variants={overlayVariants}
+            >
               <p className="text-gray-300 text-sm">
                 Book {car.name} today and enjoy a premium experience with top
                 rated vehicles and trusted providers. Smooth booking, excellent
@@ -105,7 +139,7 @@ const TopRatedCars = () => {
             </motion.div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

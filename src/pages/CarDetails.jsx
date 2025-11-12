@@ -9,86 +9,58 @@ const CarDetails = () => {
   const { user } = useContext(AuthContext);
   console.log(user);
 
-  const handleBooking = async () => {
-    if (!user) {
-      toast.error("Please login to book a car!");
+ const handleBooking = async () => {
+  if (!user) {
+    toast.error("Please login to book a car!");
+    return;
+  }
+
+  try {
+    const bookingData = {
+      carId: car._id, // only reference the car’s id
+      carName: car.carName,
+      category: car.category,
+      rentPerDay: car.rentPerDay,
+      location: car.location,
+      image: car.image,
+      providerName: car.providerName,
+      providerEmail: car.providerEmail,
+      totalAmount: car.rentPerDay, // optional
+      bookingStatus: "Active",
+      createdAt: new Date().toISOString(),
+    };
+
+    const token = user.accessToken;
+
+    const bookingRes = await fetch(
+      `https://rent-wheels-server.vercel.app/booking`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(bookingData),
+      }
+    );
+
+    const bookingResult = await bookingRes.json();
+
+    if (!bookingRes.ok || bookingResult.success === false) {
+      toast.error("Booking Failed: " + (bookingResult.message || "Unknown"));
       return;
     }
 
-    try {
-      const bookingData = {
-        ...car,
-        carId: car._id,
-        bookingStatus: "Active",
-        createdAt: new Date().toISOString(),
-      };
+    toast.success("✅ Booking Confirmed!", {
+      description: "Your car is now reserved successfully!",
+    });
 
-      const bookingRes = await fetch(
-        `https://rent-wheels-server.vercel.app/booking`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${user.accessToken}`,
-          },
-          body: JSON.stringify(bookingData),
-        }
-      );
-      const bookingResult = await bookingRes.json();
-      console.log("Booking result:", bookingResult);
-
-      if (bookingResult.success === false) {
-        toast.error("Booking Failed: " + bookingResult.message);
-        return;
-      }
-
-      const carRes = await fetch(
-        `https://rent-wheels-server.vercel.app/cars/${car._id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${user.accessToken}`,
-          },
-          body: JSON.stringify({ status: "Unavailable" }),
-        }
-      );
-      const carResult = await carRes.json();
-      console.log("Updated car status:", carResult);
-
-      toast.success("Booking Confirmed!", {
-        description: "Your car is now reserved successfully!",
-        position: "top-center",
-        duration: 2500,
-        style: {
-          background: "#09764c",
-          color: "#fff",
-          borderRadius: "12px",
-          border: "1px solid rgba(255,255,255,0.1)",
-          backdropFilter: "blur(8px)",
-        },
-      });
-
-      setTimeout(() => {
-        navigate("/my-bookings");
-      }, 2500);
-    } catch (err) {
-      console.error(err);
-      toast.error("Booking Failed!", {
-        description: "Something went wrong. Please try again.",
-        position: "top-center",
-        duration: 2500,
-        style: {
-          background: "rgba(200, 30, 30, 0.8)",
-          color: "#fff",
-          borderRadius: "12px",
-          border: "1px solid rgba(255,255,255,0.1)",
-          backdropFilter: "blur(8px)",
-        },
-      });
-    }
-  };
-
+    setTimeout(() => navigate("/my-bookings"), 2000);
+  } catch (err) {
+    console.error("Booking error:", err);
+    toast.error("Booking failed. Please try again.");
+  }
+};
   return (
     <div className="page-section">
       <Toaster richColors position="top-center" />
@@ -131,12 +103,12 @@ const CarDetails = () => {
                   {car.location}
                 </div>
                 <div>
-                  <span className="font-semibold text-white">Status:</span>{" "}
+                  <span className="font-semibold rounded-full text-white">Status:</span>{" "}
                   <span
                     className={`font-bold ${
                       car.status === "available"
-                        ? "text-[#09764c]"
-                        : "text-red-400"
+                        ? "text-[#025033] rounded-full px-3 bg-[#0fc680]"
+                        : "text-red-900 rounded-full px-3 bg-red-400"
                     }`}
                   >
                     {car.status}
