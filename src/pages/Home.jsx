@@ -7,6 +7,8 @@ import Slider from "../components/Slider";
 import OurFeatures from "../components/OurFeatures";
 import TopLocations from "../components/Locations";
 import TestimonialMarquee from "../components/TestimonialMarquee";
+import BrandCollabMarquee from "../components/BrandCollabMarquee";
+import CarEndAnimation from "../components/CarEndAnimation";
 
 const Home = () => {
   return (
@@ -16,26 +18,32 @@ const Home = () => {
       </div>
       <div className="bg-black h-[80%] flex flex-col space-y-10">
         <LatestCars />
-       <div>
+       <div className="pt-10">
          <Slider />
        </div>
-       <div>
+       <div className="py-20">
          <TopRatedCars />
        </div>
-       <div>
+       <div className="pt-20">
          <Vidio />
-       </div>
-       <div>
+       </div >
+       <div className="pt-10" >
         <OurFeatures/>
        </div>
-       <div>
+        <div className="pt-20">
+          <TestimonialMarquee/>
+        </div>
+       <div className="py-20">
         <TopLocations/>
        </div>
         <div className="hidden sm:block">
           <WhyRentWithUs />
         </div>
+          <div className="pt-20">
+          <BrandCollabMarquee/>
+        </div>
         <div>
-          <TestimonialMarquee/>
+          <CarEndAnimation/>
         </div>
       </div>
     </div>

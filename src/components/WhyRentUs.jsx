@@ -35,8 +35,8 @@ const WhyRentWithUs = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <section className="py-16 relative px-4 md:px-16 bg-black text-white">
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-[#09764c] drop-shadow-lg">
+    <section className=" relative px-4 md:px-16 bg-black text-white">
+      <h2 className="text-3xl md:text-5xl font-extrabold text-center mb-19 text-[#09764c] drop-shadow-lg">
        Our Actions Your Benefits
       </h2>
 

@@ -48,7 +48,7 @@ const fadeUp = {
 
 const TopLocations = () => {
   return (
-    <section className="bg-black text-white py-20 px-6 md:px-20 overflow-hidden">
+    <section className="bg-black text-white  px-6 md:px-20 overflow-hidden">
       {/* Heading */}
       <motion.div
         className="text-center mb-14"
@@ -57,10 +57,10 @@ const TopLocations = () => {
         transition={{ duration: 0.8 }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        <h2 className="text-4xl font-bold mb-3 text-[#16df92]">
+        <h2 className="text-5xl font-bold mb-8 text-[#07925d]">
           Top Locations
         </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
           Discover our most popular car rental destinations — where every
           journey begins with style and comfort.
         </p>

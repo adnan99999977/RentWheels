@@ -41,16 +41,16 @@ const OurFeatures = () => {
   };
 
   return (
-    <div className="bg-black text-white pt-10 pb-8 px-6 md:px-30 overflow-hidden">
+    <div className="bg-black text-white pt-10 px-6 md:px-30 overflow-hidden">
       {/* Header */}
       <motion.div
-        className="text-center mb-12"
+        className="text-center mb-25"
         initial={{ opacity: 0, y: -40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        <h2 className="text-4xl text-[#09764c] font-bold mb-4">Our Features</h2>
+        <h2 className="text-5xl mb-7 text-[#09764c] font-bold ">Our Features</h2>
         <p className="text-gray-300 max-w-2xl mx-auto">
           Discover a world of convenience, safety, and customization, paving the
           way for unforgettable adventures.

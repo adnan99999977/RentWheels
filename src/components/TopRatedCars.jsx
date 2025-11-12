@@ -70,9 +70,9 @@ const overlayVariants = {
 
 const TopRatedCars = () => {
   return (
-    <section className="py-16 px-6 w-[85%] md:w-full mx-auto md:px-16 bg-black text-white">
+    <section className="px-6 w-[85%] md:w-full mx-auto md:px-16 bg-black text-white">
       <motion.h2
-        className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-[#16df92] drop-shadow-lg"
+        className="text-3xl md:text-5xl  font-extrabold text-center mb-20 text-[#16df92] drop-shadow-lg"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}

@@ -35,13 +35,13 @@ const testimonials = [
 
 const TestimonialMarquee = () => {
   return (
-    <section className="relative mb-20 bg-black py-16 overflow-hidden">
+    <section className="relative bg-black  overflow-hidden">
       {/* Section Header */}
       <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-white">
+        <h2 className="text-3xl md:text-5xl mb-8 font-bold text-[#09764c]">
           What Our Customers Say
         </h2>
-        <p className="text-gray-400 mt-2">
+        <p className="text-gray-400 mb-9 mt-2">
           Real stories from people who trusted us
         </p>
       </div>
