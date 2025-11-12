@@ -71,7 +71,7 @@ const LatestCars = () => {
         </button>
       </form>
 
-      {/* Cars Grid */}
+      {/* Cars */}
       <div className="grid w-[80%] lg:w-full mx-auto grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {cars.map((car, index) => (
           <motion.div
@@ -90,7 +90,7 @@ const LatestCars = () => {
             </div>
 
             <div className="p-4 sm:p-5 space-y-2 sm:space-y-3">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#09764c]">
+              <h3 className="text-lg sm:text-xl md:text-xl font-semibold text-[#09764c]">
                 {car.carName}
               </h3>
               <p className="text-gray-300 text-sm sm:text-base">

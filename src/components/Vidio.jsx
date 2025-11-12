@@ -23,14 +23,14 @@ export default function Video() {
           Drive Your Dream Car Today
         </h1>
 
-        {/* Description */}
+       
         <p className="text-sm md:text-lg text-gray-200 max-w-xl">
           RentWheels offers top-quality vehicles across Bangladesh for any
           occasion — whether it’s a city trip, business journey, or weekend
           getaway.
         </p>
 
-        {/* Call to Action */}
+        
         <Link
           to={"/browse-cars"}
           className="mt-4 bg-[#0b6341] hover:bg-[#0a9962] text-gray-300 font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:scale-105"

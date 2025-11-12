@@ -45,7 +45,7 @@ const topCars = [
   },
 ];
 
-// Motion Variants
+
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {

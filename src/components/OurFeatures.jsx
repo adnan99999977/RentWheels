@@ -42,7 +42,7 @@ const OurFeatures = () => {
 
   return (
     <div className="bg-black text-white pt-10 px-6 md:px-30 overflow-hidden">
-      {/* Header */}
+     
       <motion.div
         className="text-center mb-25"
         initial={{ opacity: 0, y: -40 }}
@@ -57,7 +57,7 @@ const OurFeatures = () => {
         </p>
       </motion.div>
 
-      {/* Main Grid */}
+     
       <motion.div
         className="flex flex-col md:flex-row items-center justify-center gap-12"
         variants={containerVariant}
@@ -65,7 +65,7 @@ const OurFeatures = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        {/* Left Side */}
+        
         <motion.div
           className="flex flex-col gap-10 w-full md:w-1/3"
           variants={leftVariant}
@@ -88,7 +88,6 @@ const OurFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 24/7 Road Assistance */}
           <motion.div
             className="flex items-start gap-4"
             whileHover={{ scale: 1.05 }}
@@ -107,7 +106,7 @@ const OurFeatures = () => {
           </motion.div>
         </motion.div>
 
-        {/* Car Image */}
+        
         <motion.div
           className="w-full md:w-2/3 flex justify-center"
           variants={bottomVariant}
@@ -119,7 +118,7 @@ const OurFeatures = () => {
           />
         </motion.div>
 
-        {/* Right Side */}
+     
         <motion.div
           className="flex flex-col gap-10 w-full md:w-1/3"
           variants={rightVariant}

@@ -51,7 +51,7 @@ const Navbar = () => {
             </svg>
           </div>
 
-          <NavLink className="font-bold  title text-lg lg:text-2xl flex items-center gap-1">
+          <NavLink className="font-bold  title text-lg lg:text-2xl flex items-center gap-1 ">
             <span className="text-gray-300">RENT</span>
             <span className="text-[#09764c]">WHEELS</span>
           </NavLink>
@@ -91,7 +91,7 @@ const Navbar = () => {
           {!user ? (
             <NavLink
               to="/login"
-              className="relative hidden lg:flex  px-4 py-2 border-2 border-[#09764c] text-[#09764c] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out"
+              className="relative  lg:flex  px-4 py-2 border-2 border-[#09764c] text-[#09764c] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out"
             >
               <span className="absolute inset-0 bg-[#09764c] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
               <span className="relative z-10 flex items-center gap-2 group-hover:text-white">

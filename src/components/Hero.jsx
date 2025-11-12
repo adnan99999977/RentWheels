@@ -27,7 +27,9 @@ const Hero = () => {
         <div className="absolute inset-0 bg-black/40 z-0"></div>
 
         <motion.div className="relative z-10 flex flex-col gap-10 items-center">
-          <h1 className="text-xl md:text-4xl font-semibold text-gray-100 ">
+            <h1 className="md:hidden text-xl mt-30"> Drive Your Freedom with <span className="text-[#09764c]">RentWheels</span></h1>
+          <h1 className="text-xl hidden md:block md:text-4xl font-semibold text-gray-100 ">
+          
             Drive Your Freedom with{" "}
             <span className="text-[#09764c]">
               <Typewriter
@@ -42,7 +44,7 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* Paragraph */}
+          
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -53,7 +55,7 @@ const Hero = () => {
             need for a smooth journey.
           </motion.p>
 
-          {/* Button */}
+          
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -63,7 +65,7 @@ const Hero = () => {
             {/* Background animation layer */}
             <span className="absolute inset-0 bg-[#09764c] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
 
-            {/* Text */}
+        
             <Link
               to="/browse-cars"
               className="relative z-10 flex items-center justify-center group-hover:text-white transition-colors duration-500"

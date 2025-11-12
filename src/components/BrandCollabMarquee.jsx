@@ -46,7 +46,7 @@ const BrandCollabMarquee = () => {
         ))}
       </Marquee>
 
-      {/* Left & Right Fade Overlays */}
+      {/* Left & Right */}
       <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-black to-transparent pointer-events-none"></div>
       <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-black to-transparent pointer-events-none"></div>
     </section>

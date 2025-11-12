@@ -21,12 +21,12 @@ const BrowseCars = () => {
 
   return (
     <div className="page-section relative py-20 px-6 md:px-12">
-      {/* Background shapes */}
+   
       <div className="absolute -top-28 -right-40 w-[400px] h-[500px] bg-[#09964c]/10 rotate-45 rounded-3xl"></div>
       <div className="absolute -top-28 -right-60 w-[400px] h-[500px] bg-[#939e9c]/10 rotate-45 rounded-3xl"></div>
       <div className="absolute -top-28 -right-80 w-[400px] h-[500px] bg-[#939e9c]/10 rotate-45 rounded-3xl"></div>
 
-      {/* Page title */}
+     
       <motion.h1
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ const BrowseCars = () => {
         Every car tells a story, every collection holds a dream.
       </motion.p>
 
-      {/* Car grid */}
+      {/* Cars */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
         {cars.map((car, index) => (
           <motion.div
@@ -84,7 +84,7 @@ const BrowseCars = () => {
               </p>
             </div>
 
-            {/* Hover overlay */}
+      
             <motion.div
               className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
               whileHover={{ opacity: 1 }}

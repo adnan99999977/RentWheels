@@ -113,7 +113,6 @@ const MyListings = () => {
               key={index}
               className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-gray-900/40 backdrop-blur-md border border-white/10 rounded-3xl shadow-lg hover:shadow-green-500/30 transition-all duration-300 p-6 sm:p-8 hover:scale-[1.02]"
             >
-              {/* Car Image & Name */}
               <div className="flex items-center gap-5 sm:gap-6 flex-1">
                 <img
                   src={listing.image}
@@ -135,7 +134,6 @@ const MyListings = () => {
                 </div>
               </div>
 
-              {/* Rent & Status */}
               <div className="flex flex-col items-end gap-2 sm:gap-3">
                 <p className="text-gray-400 sm:text-sm">
                   Rent Price:{" "}

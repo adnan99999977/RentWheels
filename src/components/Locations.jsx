@@ -78,17 +78,17 @@ const TopLocations = () => {
             viewport={{ once: true, amount: 0.3 }}
             custom={i}
           >
-            {/* Image */}
+           
             <img
               src={loc.image}
               alt={loc.name}
               className="h-64 w-full object-cover opacity-90 group-hover:opacity-100 transition duration-500"
             />
 
-            {/* Overlay */}
+        
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent group-hover:from-[#09764c]/70 transition duration-500"></div>
 
-            {/* Text */}
+       
             <div className="absolute bottom-5 left-5">
               <h3 className="text-xl font-bold flex items-center gap-2">
                 <FaMapMarkerAlt className="text-[#09764c]" /> {loc.name}

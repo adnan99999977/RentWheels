@@ -17,7 +17,7 @@ const CarDetails = () => {
 
   try {
     const bookingData = {
-      carId: car._id, // only reference the car’s id
+      carId: car._id, 
       carName: car.carName,
       category: car.category,
       rentPerDay: car.rentPerDay,

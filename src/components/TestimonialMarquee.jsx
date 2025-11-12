@@ -36,17 +36,17 @@ const testimonials = [
 const TestimonialMarquee = () => {
   return (
     <section className="relative bg-black  overflow-hidden">
-      {/* Section Header */}
+
       <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-5xl mb-8 font-bold text-[#09764c]">
+        <h2 className="text-xl md:text-5xl mb-8 font-bold text-[#09764c]">
           What Our Customers Say
         </h2>
-        <p className="text-gray-400 mb-9 mt-2">
+        <p className="text-gray-400 hidden md:block mb-9 mt-2">
           Real stories from people who trusted us
         </p>
       </div>
 
-      {/* Marquee Section */}
+     
       <Marquee
         gradient={true}
         gradientColor={[0, 0, 0]}
@@ -56,7 +56,7 @@ const TestimonialMarquee = () => {
         {testimonials.map((t) => (
           <div
             key={t.id}
-            className="group relative flex-shrink-0 w-96 mx-6 p-8 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-[0_0_25px_rgba(255,255,255,0.05)] hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-500 transform hover:scale-x-103 cursor-pointer overflow-hidden"
+            className="group relative flex-shrink-0 w-70 md:w-96 mx-6 p-8 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-[0_0_25px_rgba(255,255,255,0.05)] hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-500 transform hover:scale-x-103 cursor-pointer overflow-hidden"
           >
             <div className="relative z-10">
               <FaQuoteLeft className="text-[#09764c] text-2xl mb-4" />
@@ -76,7 +76,7 @@ const TestimonialMarquee = () => {
               </div>
             </div>
 
-            {/* Overlay */}
+   
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 group-hover:from-[#09764c]/70 transition-all duration-500"></div>
           </div>
         ))}

@@ -43,7 +43,7 @@ const MyBookings = () => {
     }
   };
 
-  // ✅ Handle Booking Cancel/Delete
+  
   const handleCancel = async (bookingId) => {
     if (!auth.currentUser) return;
 
@@ -75,7 +75,7 @@ const MyBookings = () => {
       const result = await res.json();
 
       if (result.success) {
-        // remove from UI immediately
+      
         setBookings((prev) => prev.filter((b) => b._id !== bookingId));
 
         Swal.fire({
@@ -196,7 +196,7 @@ const MyBookings = () => {
                       </p>
                     </div>
 
-                    {/* ✅ Cancel Booking Button */}
+                    
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
