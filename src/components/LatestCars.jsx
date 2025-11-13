@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router";
 import { FaArrowRight } from "react-icons/fa6";
 import Loading from "./Loading";
+import { CiSearch } from "react-icons/ci";
 
 const LatestCars = () => {
   const [cars, setCars] = useState([]);
@@ -36,7 +37,7 @@ const LatestCars = () => {
       return;
     }
 
-  fetch(`https://rent-wheels-server.vercel.app/search?search=${trimmedText}`)
+    fetch(`https://rent-wheels-server.vercel.app/search?search=${trimmedText}`)
       .then((res) => res.json())
       .then((data) => setCars(data));
   };
@@ -66,8 +67,14 @@ const LatestCars = () => {
           className="outline outline-[#09764c] animate-pulse px-4 py-2 rounded-lg w-full sm:w-1/2 md:w-1/3 transition-all focus:outline-2 focus:outline-[#09764c]"
           placeholder="Search cars..."
         />
-        <button className="lg:px-4 text-sm px-1 py-2 bg-[#09764c] rounded-lg font-semibold text-black hover:bg-[#10c881] transition-colors">
-          Search
+        <button className="relative hidden lg:flex items-center gap-2 px-4 py-2 border-2 border-[#09764c] text-[#09764c] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out">
+          <span className="absolute inset-0 bg-[#09764c] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+          <span className="relative  z-10 flex items-center gap-2 group-hover:text-white">
+            Search
+          </span>
+        </button>
+        <button className="md:hidden">
+          <CiSearch size={35} color="#09764c" />
         </button>
       </form>
 
@@ -79,7 +86,7 @@ const LatestCars = () => {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="bg-gray-800/60 backdrop-blur-md border border-gray-700 rounded-2xl shadow-lg hover:shadow-[#09764c]/40 overflow-hidden group"
+            className="bg-gray-800/60 backdrop-blur-md border border-gray-700 rounded-2xl shadow-lg hover:shadow-[#09764c]/40 overflow-hidden hover:scale-105 transition-all duration-300"
           >
             <div className="overflow-hidden">
               <motion.img
@@ -114,9 +121,12 @@ const LatestCars = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex justify-center items-center gap-2 w-full sm:w-auto lg:px-4 py-2 rounded-full bg-[#09764c] hover:bg-[#11b677] text-white font-semibold transition-colors duration-300"
+                    className="flex relative justify-center items-center  lg:flex  gap-2 px-4 py-2 border-2 border-[#09764c] text-[#09764c] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out"
                   >
-                    View Details <FaArrowRight />
+                    <span className="absolute inset-0 bg-[#09764c] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+                    <span className="relative z-10 flex items-center gap-2 group-hover:text-white">
+                      View Details <FaArrowRight />
+                    </span>
                   </motion.button>
                 </Link>
               </div>

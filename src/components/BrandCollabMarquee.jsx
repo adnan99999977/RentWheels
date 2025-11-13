@@ -24,7 +24,7 @@ const brands = [
 
 const BrandCollabMarquee = () => {
   return (
-    <section className="relative pb-30 bg-black py-14 overflow-hidden">
+    <section className="relative md:pb-30 bg-black md:py-14 overflow-hidden">
       
       <div className="text-center mb-20">
         <h2 className="text-3xl md:text-4xl font-bold text-[#09764c]">

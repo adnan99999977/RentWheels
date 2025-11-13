@@ -60,7 +60,9 @@ export const router = createBrowserRouter([
       },
       {
         path: "/car-details/:id",
-        element: <CarDetails />,
+        element: <PrivateRoute>
+          <CarDetails />
+        </PrivateRoute>,
         loader: ({ params }) =>
           fetch(`https://rent-wheels-server.vercel.app/cars/${params.id}`),
       },

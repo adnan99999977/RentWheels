@@ -43,7 +43,6 @@ const MyBookings = () => {
     }
   };
 
-  
   const handleCancel = async (bookingId) => {
     if (!auth.currentUser) return;
 
@@ -75,7 +74,6 @@ const MyBookings = () => {
       const result = await res.json();
 
       if (result.success) {
-      
         setBookings((prev) => prev.filter((b) => b._id !== bookingId));
 
         Swal.fire({
@@ -144,7 +142,7 @@ const MyBookings = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className="bg-white/10 lg:w-[1000px] border border-white/10 backdrop-blur-xl rounded-2xl p-6 sm:p-8 shadow-md hover:shadow-green-500/40 transition-all duration-300"
+                  className=" bg-gray-800/40 lg:w-[1000px] border border-white/10 backdrop-blur-xl rounded-2xl p-6 sm:p-8 shadow-xl hover:shadow-green-700/40 transition-all duration-300"
                 >
                   <div className="flex flex-col sm:flex-row justify-between gap-6">
                     <div className="flex items-center gap-4">
@@ -196,14 +194,16 @@ const MyBookings = () => {
                       </p>
                     </div>
 
-                    
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => handleCancel(booking._id)}
-                      className="px-5 py-2.5 border border-red-500 text-red-400 rounded-full font-medium hover:bg-red-500 hover:text-white transition-all duration-300"
+                      className="relative lg:flex items-center gap-2 px-4 py-2 border-2 border-[#9c040f] text-[#b6383d] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out"
                     >
-                      Cancel Booking
+                      <span className="absolute inset-0 bg-[#d82828] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+                      <span className="relative z-10 flex items-center gap-2 group-hover:text-white">
+                        Cancel Booking
+                      </span>
                     </motion.button>
                   </div>
                 </motion.div>

@@ -16,12 +16,12 @@ const Home = () => {
       <div className="">
         <Hero />
       </div>
-      <div className="bg-black h-[80%] flex flex-col space-y-10">
+      <div className="bg-black  md:py-20 h-[80%] flex flex-col space-y-10">
         <LatestCars />
        <div className="pt-10">
          <Slider />
        </div>
-       <div className="py-20">
+       <div className="py-30">
          <TopRatedCars />
        </div>
        <div className="pt-20">
@@ -30,10 +30,10 @@ const Home = () => {
        <div className="pt-10" >
         <OurFeatures/>
        </div>
-        <div className="pt-20">
+        <div className="pt-30">
           <TestimonialMarquee/>
         </div>
-       <div className="py-20">
+       <div className="md:py-30">
         <TopLocations/>
        </div>
         <div className="hidden sm:block">

@@ -27,7 +27,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-black/40 z-0"></div>
 
         <motion.div className="relative z-10 flex flex-col gap-10 items-center">
-            <h1 className="md:hidden text-xl mt-30"> Drive Your Freedom with <span className="text-[#09764c]">RentWheels</span></h1>
+            <h1 className="md:hidden text-xl text-white mt-30"> Drive Your Freedom with <span className="text-[#09764c]">RentWheels</span></h1>
           <h1 className="text-xl hidden md:block md:text-4xl font-semibold text-gray-100 ">
           
             Drive Your Freedom with{" "}

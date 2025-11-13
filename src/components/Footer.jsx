@@ -201,7 +201,6 @@ const Footer = () => {
         </div>
       )}
 
-      {/* Toast Container */}
       <ToastContainer position="top-center" autoClose={3000} />
     </footer>
   );

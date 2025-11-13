@@ -35,7 +35,7 @@ const testimonials = [
 
 const TestimonialMarquee = () => {
   return (
-    <section className="relative bg-black  overflow-hidden">
+    <section className="relative bg-black pb-15 md:pb-0 overflow-hidden">
 
       <div className="text-center mb-10">
         <h2 className="text-xl md:text-5xl mb-8 font-bold text-[#09764c]">

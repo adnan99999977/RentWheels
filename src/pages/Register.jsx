@@ -165,12 +165,12 @@ const Register = () => {
 
         <button
           onClick={handleGoogle}
-          className="w-full flex items-center justify-center py-3 bg-white/90 text-gray-800 font-semibold rounded-xl border border-white/30 shadow-md hover:shadow-xl transition transform hover:scale-105 animate-fade-in-up animate-delay-800"
+          className="md:w-full flex items-center w-[250px] justify-center py-3 bg-white/90 text-gray-800 font-semibold rounded-xl border border-white/30 shadow-md hover:shadow-xl transition transform hover:scale-105 animate-fade-in-up animate-delay-800"
         >
           <svg
             aria-label="Google logo"
-            width="30"
-            height="30"
+            width="20"
+            height="20"
             viewBox="0 0 512 512"
             className="mr-2"
           >

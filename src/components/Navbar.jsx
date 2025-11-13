@@ -31,10 +31,10 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 z-100 w-full bg-black/30 backdrop-blur-2xl border-b border-gray-100/20 shadow-sm">
-      <div className="flex justify-between items-center px-6 py-4 lg:px-10">
+      <div className="flex justify-between items-center px-2 py-4 lg:px-10">
         {/* Logo & Mobile Hamburger */}
         <div className="flex items-center gap-4">
-          <div className="xl:hidden cursor-pointer" onClick={handleMobileMenu}>
+          <div className="md:hidden cursor-pointer" onClick={handleMobileMenu}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-8 w-8 text-gray-300"
@@ -116,7 +116,7 @@ const Navbar = () => {
           {user && (
             <div
               onClick={handleDropdown}
-              className="lg:w-12 w-10 h-12 rounded-full overflow-hidden border-2 border-gray-200 shadow-md hover:shadow-lg cursor-pointer transition-transform hover:scale-105"
+              className="lg:w-12 w-12 h-12 mr-3 md:mr-0 rounded-full overflow-hidden border-2 border-gray-200 shadow-md hover:shadow-lg cursor-pointer transition-transform hover:scale-105"
               title={user && user.displayName}
             >
               {user && user.photoURL && (

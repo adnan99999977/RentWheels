@@ -33,10 +33,17 @@ export default function Video() {
         
         <Link
           to={"/browse-cars"}
-          className="mt-4 bg-[#0b6341] hover:bg-[#0a9962] text-gray-300 font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:scale-105"
+          className="mt-4 relative lg:flex items-center gap-2 px-4 py-2 border-2 border-[#09764c] text-[#09764c] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out"
         >
-          Book Now
+          <span className="absolute inset-0 bg-[#09764c] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+            <span className="relative z-10 flex items-center gap-2 group-hover:text-white">
+              Book Now
+            </span>
+          
         </Link>
+
+
+         
       </div>
     </section>
   );

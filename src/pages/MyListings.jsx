@@ -111,7 +111,7 @@ const MyListings = () => {
           {listings.map((listing, index) => (
             <div
               key={index}
-              className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-gray-900/40 backdrop-blur-md border border-white/10 rounded-3xl shadow-lg hover:shadow-green-500/30 transition-all duration-300 p-6 sm:p-8 hover:scale-[1.02]"
+              className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-gray-800/40 backdrop-blur-md border border-white/10 rounded-3xl shadow-lg hover:shadow-green-500/30 transition-all duration-300 p-6 sm:p-8 hover:scale-[1.02]"
             >
               <div className="flex items-center gap-5 sm:gap-6 flex-1">
                 <img
@@ -154,15 +154,21 @@ const MyListings = () => {
                 <div className="flex gap-2 mt-2">
                   <button
                     onClick={() => handleUpdateOpen(listing)}
-                    className="px-5 py-2 bg-[#09764c] hover:bg-green-700 rounded-full font-semibold text-sm transition-all duration-300 shadow-md hover:shadow-green-400/50"
+                    className="relative lg:flex items-center gap-2 px-4 py-2 border-2 border-[#09764c] text-[#09764c] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out"
                   >
-                    Update
+                    <span className="absolute inset-0 bg-[#09764c] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+                    <span className="relative z-10 flex items-center gap-2 group-hover:text-white">
+                      Update
+                    </span>
                   </button>
                   <button
                     onClick={() => handleDelete(listing._id)}
-                    className="px-5 py-2 bg-red-600 hover:bg-red-500 rounded-full font-semibold text-sm transition-all duration-300 shadow-md hover:shadow-red-400/50"
+                    className="relative lg:flex items-center gap-2 px-4 py-2 border-2 border-[#9c040f] text-[#b6383d] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out"
                   >
-                    Delete
+                    <span className="absolute inset-0 bg-[#d82828] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+                    <span className="relative z-10 flex items-center gap-2 group-hover:text-white">
+                      Delete
+                    </span>
                   </button>
                 </div>
               </div>
