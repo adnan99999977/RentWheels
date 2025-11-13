@@ -1,35 +1,41 @@
-# React + Vite
+#RentWheels
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**RentWheels** is a modern car rental web app where users can easily browse, book, and manage car rentals online.  
+It connects users with local car owners or rental providers in a simple and smooth way.
+---
 
-Currently, two official plugins are available:
+##  Live Website : https://rentwheels-f11f0.web.app
 
-- [@vitejs/plugin-react](http
 
-://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](http
+##  Main Features
 
-://babeljs.io/) (or [oxc](http
+-  **Secure Authentication: ** Login and register using email/password or Google (powered by Firebase Auth).  
+-  **Browse Cars Easily: ** Explore a wide range of cars with images, prices, and details.  
+-  **Book Rentals Instantly: ** Select your car, choose dates, and confirm your booking in a few clicks.  
+-  **Private Dashboard: ** Logged-in users can view and manage their bookings securely.  
+-  **Dark & Light Theme Toggle: ** Switch between light and dark mode with a smooth animation.  
+-  **Smooth UI Animation: ** Framer Motion, Lottie, and Swiper make the app feel alive.  
+-  **Real-Time Toast & Alerts: ** Instant feedback using Sonner and SweetAlert2.  
+---
 
-://oxc.rs) when used in [rolldown-vite](http
+##  Tech Stack
 
-://vite.dev/guide/rolldown)) for Fast Refresh
+**Frontend:**  
+- React 19  
+- Firebase Authentication  
+- Framer Motion  
+- Lottie React  
+- React Icons  
+- React Toastify / Sonner  
+- Swiper & Slick Carousel  
+- Typewriter Effect  
+---
 
-- [@vitejs/plugin-react-swc](http
+##  
 
-://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](http
+1. **Backend **
 
-://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](http
-
-://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](http
-
-://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](http
-
-://typescript-eslint.io) in your project.
+ **Framwork - Express.js 
+ **Database - MongoDB 
+ **Hosting  - Vercel 
+ 
