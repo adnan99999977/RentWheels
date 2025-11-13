@@ -35,12 +35,29 @@ const WhyRentWithUs = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <section className=" relative px-4 md:px-16 bg-black text-white">
-      <h2 className="text-3xl md:text-5xl font-extrabold text-center mb-19 text-[#09764c] drop-shadow-lg">
-       Why Rent With Us!
-      </h2>
+    <section
+      className=" bg-fixed relative px-4 md:px-16 bg-[url('/person.jpg')] 
+  bg-cover 
+  bg-center 
+  bg-no-repeat 
+  w-full 
+  
+  min-h-[500px] md:min-h-[560px] lg:min-h-[530px]  text-white"
+    >
+      <div className="absolute inset-0 bg-black/70"></div>
+      <h2 className="text-3xl md:text-5xl font-extrabold text-center mb-19 text-[#07b16d] pt-8 drop-shadow-lg">
+        Why Rent With Us!
 
-      <div className="lg:flex flex-col sm:flex-row gap-4 lg:h-[220px] w-full ">
+            <p className="text-lg mt-10 leading-relaxed w-[70%] mx-auto text-white">
+    At <span className="text-[#00b377] font-semibold">RentWheels</span>, we don’t just rent cars — 
+    we deliver freedom, comfort, and trust on every ride. 
+    With transparent pricing, well-maintained vehicles, and 24/7 customer support, 
+    we make your journey smooth, safe, and truly hassle-free.
+  </p>
+      </h2>
+   
+
+      <div className="lg:flex  flex-col  sm:flex-row gap-4 lg:h-[220px] w-full ">
         {features.map((feature, index) => {
           const isHovered = hoveredIndex === index;
 

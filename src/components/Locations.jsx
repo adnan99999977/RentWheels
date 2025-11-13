@@ -7,7 +7,7 @@ const locations = [
     id: 1,
     name: "Dhaka",
     image:
-      "http://images.unsplash.com/photo-1706640254398-3b04782e8c76?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZGhha2ElMjBjaXR5fGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=800",
+      "/location/dhaka.jpg",
     description:
       "Experience the fast-paced energy of Bangladesh’s capital with top-tier rental options.",
   },
@@ -15,7 +15,7 @@ const locations = [
     id: 2,
     name: "Chittagong",
     image:
-      "http://media.istockphoto.com/id/470928468/photo/the-silhouette-of-fishing-boat-on-beach-bangladesh.jpg?s=612x612&w=0&k=20&c=a46laqtwn1PKqXRzOVwUVkPAgzRaVw6NuIbpjIgdjHk=",
+      "/location/chittagong.jpg",
     description:
       "Drive through coastal roads and hills with unmatched comfort and reliability.",
   },
@@ -23,7 +23,7 @@ const locations = [
     id: 3,
     name: "Sylhet",
     image:
-      "http://plus.unsplash.com/premium_photo-1666865792731-0a2656f2b12c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c3lsaGV0JTJDJTIwYmFuZ2xhZGVzaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=800",
+      "/location/sylhet.jpg",
     description:
       "Explore tea gardens and waterfalls with seamless car rental service.",
   },
@@ -31,7 +31,7 @@ const locations = [
     id: 4,
     name: "Cox’s Bazar",
     image:
-      "http://images.unsplash.com/photo-1635264647809-66e209bf0bbd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q294JUUyJTgwJTk5cyUyMEJhemFyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=800",
+      "/location/sea-beach.jpg",
     description:
       "Cruise along the world’s longest beach with a luxurious drive experience.",
   },

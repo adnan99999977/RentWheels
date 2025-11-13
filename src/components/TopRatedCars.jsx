@@ -11,7 +11,7 @@ const topCars = [
     rentPerDay: 120,
     rating: 4.9,
     image:
-      "http://images.unsplash.com/photo-1676744544740-9fd75a5aed85?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHx8&auto=format&fit=crop&q=60&w=800",
+      "https://images.unsplash.com/photo-1689310873660-77aefbc74edd?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const topCars = [
     rentPerDay: 110,
     rating: 4.8,
     image:
-      "http://images.unsplash.com/photo-1619362280286-f1f8fd5032ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGJtd3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=800",
+      "https://images.unsplash.com/photo-1641230285232-95fd25d6286d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDExfHx8ZW58MHx8fHx8",
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const topCars = [
     rentPerDay: 50,
     rating: 4.7,
     image:
-      "http://images.unsplash.com/photo-1637087867446-7c31ca973cd4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM4fHx8ZW58MHx8fHx8&auto=format&fit=crop&q=60&w=800",
+      "https://images.unsplash.com/photo-1735111162470-d4e4ebc7cece?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8",
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const topCars = [
     rentPerDay: 150,
     rating: 4.9,
     image:
-      "http://images.unsplash.com/photo-1625231334168-35067f8853ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm9yZCUyMG11c3Rhbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=800",
+      "https://images.unsplash.com/photo-1582324531594-65ba5d9bb3e9?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fHw%3D",
   },
 ];
 
