@@ -13,7 +13,6 @@ It connects users with local car owners or rental providers in a simple and smoo
 -  **Browse Cars Easily: ** Explore a wide range of cars with images, prices, and details.  
 -  **Book Rentals Instantly: ** Select your car, choose dates, and confirm your booking in a few clicks.  
 -  **Private Dashboard: ** Logged-in users can view and manage their bookings securely.  
--  **Dark & Light Theme Toggle: ** Switch between light and dark mode with a smooth animation.  
 -  **Smooth UI Animation: ** Framer Motion, Lottie, and Swiper make the app feel alive.  
 -  **Real-Time Toast & Alerts: ** Instant feedback using Sonner and SweetAlert2.  
 ---
