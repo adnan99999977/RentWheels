@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 import { AuthContext } from "../auth/AuthContext";
 import { IoLogInOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
-import { IoHomeOutline } from "react-icons/io5";
+
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -62,7 +62,7 @@ const Navbar = () => {
         <ul className="hidden text-[13px] lg:flex gap-5">
           <li>
             <NavLink to="/" className={linkClass}>
-               Home
+              Home
             </NavLink>
           </li>
           <li>
@@ -75,23 +75,13 @@ const Navbar = () => {
               Browse Cars
             </NavLink>
           </li>
-          {
-            user && <li>
-            <NavLink to="/dashboard" className={linkClass}>
-              Dashboard
-            </NavLink>
-          </li>
-          }
-          {/* <li>
-            <NavLink to="/my-bookings" className={linkClass}>
-              My Bookings
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/my-listings" className={linkClass}>
-              My Listings
-            </NavLink>
-          </li> */}
+          {user && (
+            <li>
+              <NavLink to="/dashboard" className={linkClass}>
+                Dashboard
+              </NavLink>
+            </li>
+          )}
         </ul>
 
         {/* Auth Buttons & Profile */}
@@ -152,13 +142,28 @@ const Navbar = () => {
               <ul className="py-2">
                 <li>
                   {user ? (
-                    <button
-                      onClick={handleLogout}
-                      className="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-gray-900 hover:bg-gray-100"
-                    >
-                      <CiLogout size={20} />
-                      Log out
-                    </button>
+                    <ul>
+                      <li>
+                        <NavLink to="/dashboard/profile" className='flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-gray-900 hover:bg-gray-100' >
+                          Profile
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/dashboard" className='flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-gray-900 hover:bg-gray-100' >
+                          Dashboard
+                        </NavLink>
+                      </li>
+                      <li>
+                        <button
+                          onClick={handleLogout}
+                          className="flex items-center gap-2 w-full text-left px-4 py-2 text-sm text-gray-900 hover:bg-gray-100"
+                        >
+                          <CiLogout size={20} />
+                          Log out
+                        </button>
+                      </li>
+                      
+                    </ul>
                   ) : (
                     <NavLink
                       to="/login"
@@ -201,13 +206,13 @@ const Navbar = () => {
               Browse Cars
             </NavLink>
           </li>
-           {
-            user && <li>
-            <NavLink to="/dashboard" className={linkClass}>
-              Dashboard
-            </NavLink>
-          </li>
-          }
+          {user && (
+            <li>
+              <NavLink to="/dashboard" className={linkClass}>
+                Dashboard
+              </NavLink>
+            </li>
+          )}
           {/* <li>
             <NavLink
               to="/my-bookings"
