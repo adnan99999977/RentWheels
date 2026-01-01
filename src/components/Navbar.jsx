@@ -3,6 +3,7 @@ import { NavLink } from "react-router";
 import { AuthContext } from "../auth/AuthContext";
 import { IoLogInOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
+import { IoHomeOutline } from "react-icons/io5";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -58,10 +59,10 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex gap-5">
+        <ul className="hidden text-[13px] lg:flex gap-5">
           <li>
             <NavLink to="/" className={linkClass}>
-              Home
+               Home
             </NavLink>
           </li>
           <li>
@@ -74,7 +75,14 @@ const Navbar = () => {
               Browse Cars
             </NavLink>
           </li>
-          <li>
+          {
+            user && <li>
+            <NavLink to="/dashboard" className={linkClass}>
+              Dashboard
+            </NavLink>
+          </li>
+          }
+          {/* <li>
             <NavLink to="/my-bookings" className={linkClass}>
               My Bookings
             </NavLink>
@@ -83,7 +91,7 @@ const Navbar = () => {
             <NavLink to="/my-listings" className={linkClass}>
               My Listings
             </NavLink>
-          </li>
+          </li> */}
         </ul>
 
         {/* Auth Buttons & Profile */}
@@ -94,7 +102,7 @@ const Navbar = () => {
               className="relative  lg:flex  px-2 lg:px-5 py-2 border-2 border-[#09764c] text-[#09764c] font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out"
             >
               <span className="absolute inset-0 bg-[#09764c] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-              <span className="relative z-10 flex items-center gap-2 group-hover:text-white">
+              <span className="relative text-[12px] z-10 flex items-center gap-2 group-hover:text-white">
                 <IoLogInOutline size={20} />
                 Log In
               </span>
@@ -105,7 +113,7 @@ const Navbar = () => {
               className="relative hidden lg:flex items-center gap-2 px-4 py-2 border-2 border-red-400 text-red-400 font-semibold rounded-full overflow-hidden group transition-all duration-500 ease-out"
             >
               <span className="absolute inset-0 bg-red-400 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-              <span className="relative z-10 flex items-center gap-2 group-hover:text-white">
+              <span className="relative text-[12px] z-10 flex items-center gap-2 group-hover:text-white">
                 <CiLogout size={20} />
                 Log Out
               </span>
@@ -193,7 +201,14 @@ const Navbar = () => {
               Browse Cars
             </NavLink>
           </li>
-          <li>
+           {
+            user && <li>
+            <NavLink to="/dashboard" className={linkClass}>
+              Dashboard
+            </NavLink>
+          </li>
+          }
+          {/* <li>
             <NavLink
               to="/my-bookings"
               className={linkClass}
@@ -210,7 +225,7 @@ const Navbar = () => {
             >
               My Listings
             </NavLink>
-          </li>
+          </li> */}
         </ul>
       )}
     </nav>

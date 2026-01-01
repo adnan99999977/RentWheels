@@ -10,6 +10,8 @@ import MyListings from "../pages/MyListings";
 import CarDetails from "../pages/CarDetails";
 import PrivateRoute from "./PrivetRoute";
 import ErrorPage from "../components/ErrorPage";
+import DashboardLayout from "../layout/DashboardLayout";
+import DashboardHome from "../pages/dashboard/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -68,4 +70,15 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path:'/',
+    element:<DashboardLayout/>,
+    children:[
+      {
+      path:'dashboard' ,
+      element:<DashboardHome/>
+      }
+    ]
+  }
+ 
 ]);
