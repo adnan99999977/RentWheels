@@ -13,38 +13,64 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState("");
 
-  const handleGoogle = () => {
-    signInViaGoogle()
-      .then(() => {
-        toast.success("Logged in with Google!", {
-          description: "Welcome back!",
-          position: "top-center",
-          duration: 2500,
-          style: {
-            background: "#09764c",
-            color: "#fff",
-            borderRadius: "12px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            backdropFilter: "blur(8px)",
-          },
-        });
-        setTimeout(() => navigate(from), 2500);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("❌ Google login failed!", {
-          description: "Try again later.",
-          position: "top-center",
-          duration: 2500,
-          style: {
-            background: "#a82323",
-            color: "#fff",
-            borderRadius: "12px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            backdropFilter: "blur(8px)",
-          },
-        });
+  const buildUserPayload = (user) => {
+    return {
+      name: user.displayName || "Unknown",
+      email: user.email,
+      role: "user",
+      profileImage: user.photoURL || "",
+      totalCreatedCar: 0,
+      totalBookingCar: 0,
+      createdAt: new Date().toISOString(),
+    };
+  };
+
+  const saveUserToDB = async (userData) => {
+    return fetch("https://rent-wheels-server.vercel.app/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    }).then((res) => res.json());
+  };
+
+  const handleGoogle = async () => {
+    try {
+      const result = await signInViaGoogle();
+      const loggedUser = result.user;
+
+      const userPayload = buildUserPayload(loggedUser);
+      await saveUserToDB(userPayload);
+      toast.success(" Logged in with Google!", {
+        description: "Welcome aboard!",
+        position: "top-center",
+        duration: 2500,
+        style: {
+          background: "#09764c",
+          color: "#fff",
+          borderRadius: "12px",
+          border: "1px solid rgba(255,255,255,0.1)",
+          backdropFilter: "blur(8px)",
+        },
       });
+
+      navigate(from);
+    } catch (err) {
+      console.error(err);
+      toast.error("❌ Google login failed!", {
+        description: "Try again later.",
+        position: "top-center",
+        duration: 2500,
+        style: {
+          background: "#a82323",
+          color: "#fff",
+          borderRadius: "12px",
+          border: "1px solid rgba(255,255,255,0.1)",
+          backdropFilter: "blur(8px)",
+        },
+      });
+    }
   };
 
   const handleLogin = (e) => {

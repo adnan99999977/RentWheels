@@ -2,32 +2,90 @@ import React, { useContext, useState, useEffect } from "react";
 import { Users, Calendar, DollarSign, BarChart2 } from "lucide-react";
 import { AuthContext } from "../../auth/AuthContext";
 import { SyncLoader } from "react-spinners";
-import { format } from "date-fns"; 
-import CountUp from "react-countup"; 
+import { format } from "date-fns";
+import CountUp from "react-countup";
+import { useNavigate } from "react-router";
+import { getAuth } from "firebase/auth";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const auth = getAuth();
 
+  const [loading, setLoading] = useState(true);
+  const [bookings, setBookings] = useState([]);
+  const [addedCars, setAddedCars] = useState([]);
+  const [userData, setUserData] = useState(null);
+  const [randomStats, setRandomStats] = useState({ revenue: 0, followers: 0 });
+
+  console.log(bookings);
+
+  // 🔹 Generate random revenue & followers
+  const generateRandomStats = () => {
+    const revenue = Math.floor(Math.random() * 200) + 100; // $100 - $300
+    const followers = Math.floor(Math.random() * 200) + 50; // 50k - 250k
+    setRandomStats({ revenue, followers });
+  };
+
+  // 🔹 Fetch user info
+  const fetchUserData = async () => {
+    try {
+      if (!user?.email) return;
+      const res = await fetch(
+        `https://rent-wheels-server.vercel.app/users?email=${encodeURIComponent(
+          user.email
+        )}`
+      );
+      const data = await res.json();
+      if (data.success && data.user) setUserData(data.user);
+
+      generateRandomStats();
+    } catch (err) {
+      console.error("Fetch user error:", err);
+    }
+  };
+
+  // 🔹 Fetch user's bookings
   const fetchBookings = async () => {
-    if (!auth.currentUser) {
-      setBookings([]);
-      setLoading(false);
-      return;
-    }}
+    try {
+      const token = await auth.currentUser.getIdToken();
+      const res = await fetch("https://rent-wheels-server.vercel.app/booking", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      setBookings(data);
+    } catch (err) {
+      console.error("Failed to fetch bookings:", err);
+    }
+  };
+
+  // 🔹 Fetch added cars
+  const fetchAddedCars = async () => {
+    try {
+      if (!user?.email) return;
+      const res = await fetch(
+        `https://rent-wheels-server.vercel.app/cars?ProviderEmail=${encodeURIComponent(
+          user.email
+        )}`
+      );
+      const data = await res.json();
+      if (Array.isArray(data)) setAddedCars(data);
+      else setAddedCars([]);
+    } catch (err) {
+      console.error("Fetch added cars error:", err);
+      setAddedCars([]);
+    }
+  };
 
   useEffect(() => {
-    if (user) setLoading(false);
+    if (user) {
+      Promise.all([fetchUserData(), fetchBookings(), fetchAddedCars()]).finally(
+        () => setLoading(false)
+      );
+    }
   }, [user]);
 
-  const stats = [
-    { title: "Total Bookings", value: 34, icon: <Calendar size={28} /> },
-    { title: "Cars Listed", value: 12, icon: <BarChart2 size={28} /> },
-    { title: "Revenue Earned", value: 4800, icon: <DollarSign size={28} />, prefix: "$" },
-    { title: "Followers", value: 1200, icon: <Users size={28} />, suffix: "k" },
-  ];
-
-  if (loading || !user) {
+  if (loading || !userData) {
     return (
       <div className="flex items-center justify-center h-full">
         <SyncLoader size={15} color="#09764c" />
@@ -35,36 +93,59 @@ const Profile = () => {
     );
   }
 
-  const joinDate = user.metadata?.creationTime
+  const joinDate = user?.metadata?.creationTime
     ? format(new Date(user.metadata.creationTime), "MMMM dd, yyyy")
     : "N/A";
 
+  const stats = [
+    {
+      title: "Total Bookings",
+      value: bookings.length,
+      icon: <Calendar size={28} />,
+    },
+    {
+      title: "Cars Listed",
+      value: addedCars.length,
+      icon: <BarChart2 size={28} />,
+    },
+    {
+      title: "Revenue Earned",
+      value: randomStats.revenue,
+      icon: <DollarSign size={28} />,
+      prefix: "$",
+    },
+    {
+      title: "Followers",
+      value: randomStats.followers,
+      icon: <Users size={28} />,
+      suffix: "k",
+    },
+  ];
+
   return (
     <div className="space-y-10 p-6 md:p-10">
-      {/* User Info Card */}
-      <div className="flex flex-col md:flex-row items-center bg-black/20 backdrop-blur-xl rounded-2xl shadow-lg p-6 md:p-10 animate-fadeIn transition-all duration-500 hover:shadow-2xl">
-        {/* Avatar */}
-        <div className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden flex items-center justify-center bg-green-600/30 border-2 border-green-600">
+      {/* USER INFO */}
+      <div className="flex flex-col md:flex-row items-center bg-black/20 backdrop-blur-xl rounded-2xl shadow-lg p-6 md:p-10 animate-fadeIn gap-6">
+        <div className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-2 border-green-600 bg-black/20">
           <img
-            src={user.photoURL}
-            alt="User Avatar"
+            src={user?.photoURL}
+            alt="Avatar"
             className="w-full h-full object-cover"
           />
         </div>
-
-        {/* User Info */}
-        <div className="mt-4 md:mt-0 md:ml-8 flex-1 text-center md:text-left">
+        <div className="flex-1 text-center md:text-left">
           <h1 className="text-2xl md:text-4xl font-bold text-gray-100">
-            {user.displayName || "Unknown User"}
+            {user?.displayName || "Unknown User"}
           </h1>
-          <p className="text-gray-300 mt-1 text-sm md:text-base">{user.email || "No Email"}</p>
+          <p className="text-gray-300 mt-1">{user?.email}</p>
           <p className="text-gray-400 mt-2 text-sm">
-            Member since: <span className="text-green-500 font-semibold">{joinDate}</span>
+            Member since:{" "}
+            <span className="text-green-500 font-semibold">{joinDate}</span>
           </p>
         </div>
       </div>
 
-      {/* Stats Cards */}
+      {/* STATS CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         {stats.map((stat) => (
           <div
@@ -75,7 +156,9 @@ const Profile = () => {
               {stat.icon}
             </div>
             <div>
-              <h3 className="text-gray-400 text-sm font-medium">{stat.title}</h3>
+              <h3 className="text-gray-400 text-sm font-medium">
+                {stat.title}
+              </h3>
               <p className="text-gray-100 text-lg md:text-xl font-bold mt-1">
                 <CountUp
                   end={stat.value}
@@ -89,26 +172,61 @@ const Profile = () => {
         ))}
       </div>
 
-      {/* Editable Info Section */}
-      <div className="bg-black/20 backdrop-blur-xl rounded-2xl shadow-lg p-6 md:p-10 animate-fadeIn transition-all duration-500">
-        <h2 className="text-xl md:text-2xl font-semibold text-gray-100 mb-6">
-          Profile Details
+      {/* ADDED CARS */}
+      <div>
+        <h2 className="text-xl md:text-2xl font-semibold text-gray-100 mb-4">
+          Your Listings
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {[
-            { label: "Full Name", value: user.displayName, placeholder: "Enter your name" },
-            { label: "Email", value: user.email, placeholder: "Enter your email" }
-          ].map((field) => (
-            <div className="flex flex-col" key={field.label}>
-              <label className="text-gray-400 text-sm mb-1">{field.label}</label>
-              <input
-                type="text"
-                value={field.value || ""}
-                placeholder={field.placeholder}
-                className={`p-3 rounded-lg bg-white/10 text-gray-100 backdrop-blur-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-600 transition-all duration-300`}
-              />
-            </div>
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {addedCars.length > 0 ? (
+            addedCars.map((car) => (
+              <div
+                key={car._id}
+                className="bg-black/20 backdrop-blur-xl rounded-2xl shadow-lg p-4 cursor-pointer hover:shadow-2xl transition"
+               
+              >
+                <img
+                  src={car.image || "/placeholder.png"}
+                  alt={car.name}
+                  className="w-full h-40 object-cover rounded-lg mb-2"
+                />
+                <h3 className="text-gray-100 font-semibold">{car.name}</h3>
+                <p className="text-gray-400 text-sm">
+                  {car.model || "Model N/A"}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-400">No cars listed yet.</p>
+          )}
+        </div>
+      </div>
+
+      {/* BOOKINGS */}
+      <div>
+        <h2 className="text-xl md:text-2xl font-semibold text-gray-100 mb-4">
+          Your Bookings
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {bookings.length > 0 ? (
+            bookings.map((booking) => (
+              <div
+                key={booking._id}
+                className="bg-black/20 backdrop-blur-xl rounded-2xl shadow-lg p-4 cursor-pointer hover:shadow-2xl transition"
+              >
+                <img
+                  src={booking.image || "/placeholder.png"}
+                  alt={booking.carName}
+                  className="w-full h-40 object-cover rounded-lg mb-2"
+                />
+                <h3 className="text-gray-100 font-semibold">
+                  {booking.carName}
+                </h3>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-400">No bookings yet.</p>
+          )}
         </div>
       </div>
     </div>

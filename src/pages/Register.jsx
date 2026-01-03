@@ -13,38 +13,65 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
 
-  const handleGoogle = () => {
-    signInViaGoogle()
-      .then(() => {
-        toast.success(" Logged in with Google!", {
-          description: "Welcome aboard!",
-          position: "top-center",
-          duration: 2500,
-          style: {
-            background: "#09764c",
-            color: "#fff",
-            borderRadius: "12px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            backdropFilter: "blur(8px)",
-          },
-        });
-        setTimeout(() => navigate(from), 2500);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("❌ Google login failed!", {
-          description: "Try again later.",
-          position: "top-center",
-          duration: 2500,
-          style: {
-            background: "#a82323",
-            color: "#fff",
-            borderRadius: "12px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            backdropFilter: "blur(8px)",
-          },
-        });
+  const buildUserPayload = (firebaseUser) => {
+    return {
+      name: firebaseUser.displayName || "Unknown",
+      email: firebaseUser.email,
+      role: "user",
+      profileImage: firebaseUser.photoURL || "",
+      totalCreatedCar: 0,
+      totalBookingCar: 0,
+      createdAt: new Date().toISOString(),
+    };
+  };
+
+  const saveUserToDB = async (userData) => {
+    return fetch("https://rent-wheels-server.vercel.app/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    }).then((res) => res.json());
+  };
+
+  const handleGoogle = async () => {
+    try {
+      const result = await signInViaGoogle();
+      const loggedUser = result.user;
+
+      const userPayload = buildUserPayload(loggedUser);
+      await saveUserToDB(userPayload);
+
+      toast.success(" Logged in with Google!", {
+        description: "Welcome aboard!",
+        position: "top-center",
+        duration: 2500,
+        style: {
+          background: "#09764c",
+          color: "#fff",
+          borderRadius: "12px",
+          border: "1px solid rgba(255,255,255,0.1)",
+          backdropFilter: "blur(8px)",
+        },
       });
+
+      navigate(from);
+    } catch (err) {
+      console.error(err);
+      toast.error("❌ Google login failed!", {
+        description: "Try again later.",
+        position: "top-center",
+        duration: 2500,
+        style: {
+          background: "#a82323",
+          color: "#fff",
+          borderRadius: "12px",
+          border: "1px solid rgba(255,255,255,0.1)",
+          backdropFilter: "blur(8px)",
+        },
+      });
+    }
   };
 
   const validatePassword = (password) => {
@@ -52,8 +79,9 @@ const Register = () => {
     return regex.test(password);
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+
     const email = e.target.email.value;
     const password = e.target.password.value;
     const photoURL = e.target.photo.value;
@@ -67,38 +95,48 @@ const Register = () => {
       setPasswordError("");
     }
 
-    registerUser(email, password)
-      .then(() => {
-        updateUser({ photoURL }).catch(console.error);
-        toast.success("✅ Registration successful!", {
-          description: "Welcome to RentWheels!",
-          position: "top-center",
-          duration: 2500,
-          style: {
-            background: "#09764c",
-            color: "#fff",
-            borderRadius: "12px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            backdropFilter: "blur(8px)",
-          },
-        });
-        setTimeout(() => navigate(from), 2500);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("❌ Registration failed!", {
-          description: "Please check your credentials.",
-          position: "top-center",
-          duration: 2500,
-          style: {
-            background: "#a82323",
-            color: "#fff",
-            borderRadius: "12px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            backdropFilter: "blur(8px)",
-          },
-        });
+    try {
+      const result = await registerUser(email, password);
+      const loggedUser = result.user;
+
+      await updateUser({ photoURL });
+
+      const userPayload = buildUserPayload({
+        ...loggedUser,
+        photoURL,
       });
+
+      await saveUserToDB(userPayload);
+
+      toast.success("✅ Registration successful!", {
+        description: "Welcome to RentWheels!",
+        position: "top-center",
+        duration: 2500,
+        style: {
+          background: "#09764c",
+          color: "#fff",
+          borderRadius: "12px",
+          border: "1px solid rgba(255,255,255,0.1)",
+          backdropFilter: "blur(8px)",
+        },
+      });
+
+      setTimeout(() => navigate(from), 2500);
+    } catch (err) {
+      console.error(err);
+      toast.error("❌ Registration failed!", {
+        description: "Please check your credentials.",
+        position: "top-center",
+        duration: 2500,
+        style: {
+          background: "#a82323",
+          color: "#fff",
+          borderRadius: "12px",
+          border: "1px solid rgba(255,255,255,0.1)",
+          backdropFilter: "blur(8px)",
+        },
+      });
+    }
   };
 
   return (
