@@ -30,15 +30,15 @@ const DashboardLayout = () => {
     <div className="flex h-screen">
       {/* Sidebar */}
       <aside
-        className={`bg-[#021f14e0] text-white flex flex-col h-full fixed z-50 md:static md:w-64 transition-transform backdrop-blur-3xl duration-300 ${
+        className={` bg-[#000000e5] text-white flex flex-col h-full fixed z-50 md:static md:w-64 transition-transform backdrop-blur-3xl duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
         <Link
           to={"/"}
-          className="p-6 text-2xl font-bold text-center border-b border-white/20"
+          className="p-5 text-2xl font-bold text-center border-b border-white/20"
         >
-          <span className="text-gray-300 ">RENT</span>
+          <span className="text-gray-300 mr-2 ">RENT</span>
           <span className="text-[#09764c]">WHEELS</span>
         </Link>
         <nav className="flex-1 mt-6">
@@ -72,9 +72,9 @@ const DashboardLayout = () => {
       )}
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex bg-black flex-col">
         {/* Top Navbar */}
-        <header className="h-16 flex items-center md:justify-between gap-3 px-6  w-full bg-black/30 backdrop-blur-2xl border-b border-gray-100/20 shadow-sm">
+        <header className="h-16 md:h-[73px] md:border-b-1 md:border-l-1 border-gray-600 flex items-center md:justify-between gap-3 px-6  w-full bg-white/10  backdrop-blur-2xl border-b  border-black-100/20 shadow-sm">
           {/* Hamburger button */}
           <button
             className="md:hidden text-white"
@@ -83,7 +83,7 @@ const DashboardLayout = () => {
             {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
-          <div className="text-xl  font-semibold text-gray-100 md:text-gray-800">
+          <div className="text-xl  font-semibold text-gray-100 md:text-gray-100">
             Dashboard
           </div>
 
@@ -93,8 +93,19 @@ const DashboardLayout = () => {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 p-6 z-1 overflow-y-auto bg-gray-100">
+        <main className="flex-1 p-6 pt-10 overflow-y-auto relative bg-white/10 backdrop-blur-md">
           <Outlet />
+
+          {/* Water-drop Gradient Backgrounds */}
+          <div className="hidden md:block">
+             <div className="absolute top-[15%] right-[-20%] w-[80vw] max-w-[800px] h-[40vh] max-h-[420px] bg-gradient-to-br from-[#09964c]/20 to-[#09964c]/5 rounded-full blur-2xl  opacity-80 z-0"></div>
+
+          <div className="absolute top-[-10%] left-[-15%] w-[60vw] max-w-[600px] h-[80vh] max-h-[680px] bg-gradient-to-tr from-[#939e9c]/20 to-[#939e9c]/5 rounded-[50%_20%_50%_20%] blur-2xl rotate-12  z-0"></div>
+
+          <div className="absolute bottom-[-40%] right-[-5%] w-[42vw] max-w-[420px] h-[50vh] max-h-[500px] bg-gradient-to-l from-[#939e9c]/15 to-[#09964c]/5 rounded-[30%_60%_40%_70%] blur-2xl rotate-6  z-0"></div>
+
+          <div className="absolute bottom-[5%] left-[5%] w-[30vw] max-w-[300px] h-[20vh] max-h-[200px] bg-gradient-to-l from-[#939e9c]/15 to-[#09964c]/5 rounded-full blur-xl rotate-6  z-0"></div>
+          </div>
         </main>
       </div>
     </div>

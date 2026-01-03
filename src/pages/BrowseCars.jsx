@@ -6,7 +6,9 @@ import Loading from "../components/Loading";
 const BrowseCars = () => {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
-  const skeletons = Array.from({ length: 6 });
+  const skeletons = Array.from({ length: 12 });
+  console.log(cars);
+  
 
   useEffect(() => {
     setLoading(true);
@@ -15,6 +17,8 @@ const BrowseCars = () => {
       .then((data) => setCars(data))
       .finally(() => setLoading(false));
   }, []);
+
+  
 
   return (
     <div className="page-section relative py-20 px-6 md:px-12">
@@ -40,7 +44,7 @@ const BrowseCars = () => {
       </motion.p>
 
       {/* Cars */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {loading
           ? // Skeleton Loader
             skeletons.map((_, index) => (
@@ -78,12 +82,16 @@ const BrowseCars = () => {
 
                   {/* Car Info */}
                   <div className="p-4 flex flex-col gap-2 relative z-10">
-                    <h2 className="text-xl font-semibold text-white group-hover:text-[#09764c] transition-colors duration-300">
+                    <h2 className="text-sm font-semibold text-white group-hover:text-[#09764c] transition-colors duration-300">
                       {car.carName}
                     </h2>
-                    <p className="text-gray-300 text-sm">
+                    <p className="text-gray-400 text-sm">
                       Category:{" "}
                       <span className="font-semibold">{car.category}</span>
+                    </p>
+                    <p className="text-yellow-200 text-sm">
+                      Price:{" "}
+                      <span className="font-semibold">{car.rentPerDay}</span>
                     </p>
                     <p className="text-gray-300 font-medium text-sm">
                       Status:{" "}

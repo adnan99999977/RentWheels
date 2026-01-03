@@ -13,6 +13,9 @@ import ErrorPage from "../components/ErrorPage";
 import DashboardLayout from "../layout/DashboardLayout";
 import DashboardHome from "../pages/dashboard/DashboardHome";
 import Profile from "../pages/dashboard/Profile";
+import Contact from "../pages/Contact";
+import Privacy from "../pages/Privacy";
+import About from "../pages/About";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +47,18 @@ export const router = createBrowserRouter([
       {
         path: "/browse-cars",
         element: <BrowseCars />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/privacy",
+        element: <Privacy />,
+      },
+      {
+        path: "/Contact",
+        element: <Contact/>,
       },
       {
         path: "/my-bookings",
